@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Formulaire de saisie </title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<!-- L'action du formulaire correspond à l'URL de la servlet -->
+                <!-- On indique la servlet qui joue le rôle de "contrôleur" MVC -->
+		<form action="NOMSERVLET" method="POST">
+			Sexe: <br>
+			<!-- 2 boutons radio pour saisir la valeur du paramètre p1 -->
+			<input type="radio" name="p1" value="M"> Masculin<br>
+			<input type="radio" name="p1" value="F" checked> Féminin<br>
+			<!-- Un bouton pour "Soumettre" le formulaire -->
+			<!-- provoque l'appel de la servlet en lui passant le paramètre p1 -->
+			<input type="submit">			
+		</form>
+	</body>
+</html>
