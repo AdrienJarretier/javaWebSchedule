@@ -1,3 +1,5 @@
+-- insert à vérifier
+
 INSERT INTO class_room (building, room_nb, capacity)  VALUES 
 ('Borel', 12, 12),
 ('Borel', 215, 35),
