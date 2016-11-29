@@ -18,13 +18,14 @@ CREATE TABLE degree(
 );
 
 
-CREATE TABLE teacher (
+CREATE TABLE user (
 	id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY
         (START WITH 1, INCREMENT BY 1), 
 	email VARCHAR(30) UNIQUE, 
 	first_name VARCHAR(30),
 	last_name VARCHAR(30), 
-	password VARCHAR(64)
+	password VARCHAR(64),
+	is_admin BOOLEAN
 );
 
 
@@ -35,7 +36,7 @@ CREATE TABLE lesson (
 	time_end TIMESTAMP, 
 	title VARCHAR(30), 
 	class_room_id INT REFERENCES class_room,
-	teacher_id INT REFERENCES teacher 
+	teacher_id INT REFERENCES user 
 );
 
 
