@@ -5,21 +5,19 @@
  */
 package model;
 
+import java.sql.SQLException;
+import javax.sql.DataSource;
+
 /**
  *
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
 public class UserDao {
-    
-    private UserDao() {
-    }
-    
-    public static UserDao getInstance() {
-        return UserDaoHolder.INSTANCE;
-    }
-    
-    private static class UserDaoHolder {
 
-        private static final UserDao INSTANCE = new UserDao();
+    private final DataSource myDataSource;
+
+    public UserDao() throws SQLException {
+        this.myDataSource = DS.getDataSource();
     }
+
 }
