@@ -13,12 +13,21 @@ import javax.sql.DataSource;
  * @author Laurie
  */
 public class DS {
-
+    
+    private DS(){
+        
+    }
+    
+    /**
+     * 
+     * @return
+     * @throws SQLException 
+     */
     public static DataSource getDataSource() throws SQLException {
         org.apache.derby.jdbc.ClientDataSource ds = new org.apache.derby.jdbc.ClientDataSource();
-        ds.setDatabaseName("sample");
-        ds.setUser("app");
-        ds.setPassword("app");
+        ds.setDatabaseName("schedule");
+        ds.setUser("sched");
+        ds.setPassword("sched");
         // The host on which Network Server is running
         ds.setServerName("localhost");
         // port on which Network Server is listening
