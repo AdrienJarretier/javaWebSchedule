@@ -10,5 +10,13 @@ package model;
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
 public class User {
+    int id ; 
+    String email ; 
+    String first_name ; 
+    String last_name ; 
+    Boolean is_admin ; 
     
+    public User(){
+        
+    }
 }

@@ -20,4 +20,7 @@ public class UserDao {
         this.myDataSource = DS.getDataSource();
     }
 
+    public User verify_login(String login, String mp){
+        
+    }
 }
