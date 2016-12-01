@@ -51,7 +51,7 @@ public class StaffDao {
         byte[] passwordBytes = saltedPassword.getBytes();
         byte[] passwordHashed = md.digest(passwordBytes);
 
-        String sql = "SELECT * FROM " + staffTable + "where email = ?";
+        String sql = "SELECT * FROM " + staffTable + " WHERE email = ?";
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
 
