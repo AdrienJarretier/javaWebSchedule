@@ -67,7 +67,7 @@ public class LessonDAO {
      * @param lessonId the id of the lesson to delete
      */
     public void remove(int lessonId) throws SQLException {
-        String sql = "DELETE FROM " + lessonTable + "WHERE ID = ?";
+        String sql = "DELETE FROM " + lessonTable + " WHERE ID = ?";
         
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -85,7 +85,7 @@ public class LessonDAO {
      * @param class_room
      */
     public void remove(Timestamp time_start, Class_room class_room) throws SQLException {
-        String sql = "DELETE FROM " + lessonTable + "WHERE time_start = ? and class_room_id = ?";
+        String sql = "DELETE FROM " + lessonTable + " WHERE time_start = ? and class_room_id = ?";
         
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -104,7 +104,7 @@ public class LessonDAO {
      * @param teacher
      */
     public void remove(Timestamp time_start, Staff teacher) throws SQLException {
-        String sql = "DELETE FROM " + lessonTable + "WHERE time_start = ? and teacher_id = ?";
+        String sql = "DELETE FROM " + lessonTable + " WHERE time_start = ? and teacher_id = ?";
         
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -123,7 +123,7 @@ public class LessonDAO {
      * @param lesson the lesson to be recorded
      */
     public void edit(Lesson lesson) throws SQLException {
-        String sql = "UPDATE " + lessonTable + "SET time_start = ?, "
+        String sql = "UPDATE " + lessonTable + " SET time_start = ?, "
                                              + "time_end = ?, "
                                              + "title = ?, "
                                              + "class_room_id = ?, "
