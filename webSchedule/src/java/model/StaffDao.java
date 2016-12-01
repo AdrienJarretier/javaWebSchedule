@@ -43,11 +43,20 @@ public class StaffDao {
         ResultSet rs = stmt.executeQuery();
 
         byte[] passwordStored = null;
+        int id = 0;
+        String email = null;
+        String lastName = null; 
+        String firstName = null;
+        boolean isAdmin = false;
 
         if (rs.next()) {
             passwordStored = rs.getBytes("password");
-
-            // TODO get all row
+            id = rs.getInt("id");
+            email = rs.getString("email");
+            lastName = rs.getString("last_name");
+            firstName = rs.getString("first_name");
+            isAdmin = rs.getBoolean("is_admin");
+            
         }
 
         rs.close();
@@ -56,7 +65,7 @@ public class StaffDao {
 
         if (Arrays.equals(passwordHashed, passwordStored)) {
 
-            return new Staff();
+            return new Staff(id, email, lastName, firstName, isAdmin);
 
         } else {
             // TODO throw exception
