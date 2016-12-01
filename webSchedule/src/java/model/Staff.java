@@ -10,11 +10,11 @@ package model;
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
 public class Staff {
-    int id ; 
-    String email; 
-    String firstName ; 
-    String lastName ; 
-    Boolean isAdmin ; 
+    private int id ; 
+    private String email; 
+    private String firstName ; 
+    private String lastName ; 
+    private Boolean isAdmin ; 
     
     public Staff(int id, String email, String firstName, String lastName, Boolean isAdmin ){
         this.id = id;
