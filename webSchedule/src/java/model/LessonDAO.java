@@ -5,22 +5,60 @@
  */
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import javax.sql.DataSource;
 
 /**
  *
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
 public class LessonDAO {
+    private final DataSource myDataSource;
 
+    private static final String lessonTable = "lesson";
+    
+    public LessonDAO() throws SQLException {
+        this.myDataSource = DS.getDataSource();
+    }
+    
     /**
      * insert a new lesson in the database
      *
      * @param lesson the lesson to insert in the db
      * @return the id of the inserted row
      */
-    public int add(Lesson lesson) {
+    public int add(Lesson lesson) throws SQLException {
+        String sql = "INSERT INTO " + lessonTable + 
+                     "(time_start, time_end, title, class_room, teacher_id)" 
+                 + "VALUES (?,?,?,?,?)";
+        
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
 
+        stmt.setTimestamp(1, lesson.getTimeStart());
+        stmt.setTimestamp(2, lesson.getTimeEnd());
+        stmt.setString(3, lesson.getTitle());
+        stmt.setInt(4, lesson.getClassRoom());
+        stmt.setInt(5, lesson.getTeacherId());
+        stmt.execute();
+        
+        ResultSet generatedKeys = stmt.getGeneratedKeys();
+
+        int generatedId = 0;
+
+        if (generatedKeys.next()) {
+            generatedId = generatedKeys.getInt(1);
+        }
+
+        generatedKeys.close();
+        stmt.close();
+        connection.close();
+
+        return generatedId;
     }
 
     /**

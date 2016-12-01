@@ -14,16 +14,40 @@ public class Lesson {
     private Timestamp timeStart;
     private Timestamp timeEnd;
     private String title;
-    private int class_room;
-    private int teacher_id;
+    private int classRoom;
+    private int teacherId;
 
     public Lesson(int id, Timestamp timeStart, Timestamp timeEnd, String title, int class_room, int teacher_id) {
         this.id = id;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.title = title;
-        this.class_room = class_room;
-        this.teacher_id = teacher_id;
+        this.classRoom = class_room;
+        this.teacherId = teacher_id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Timestamp getTimeStart() {
+        return timeStart;
+    }
+
+    public Timestamp getTimeEnd() {
+        return timeEnd;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getClassRoom() {
+        return classRoom;
+    }
+
+    public int getTeacherId() {
+        return teacherId;
     }
     
     
