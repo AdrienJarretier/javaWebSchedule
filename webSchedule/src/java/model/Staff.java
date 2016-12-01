@@ -23,4 +23,8 @@ public class Staff {
         this.lastName = lastName;
         this.isAdmin = isAdmin ; 
     }
+    
+    public int getId (){
+        return id;
+    }
 }
