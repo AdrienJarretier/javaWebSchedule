@@ -26,7 +26,7 @@ public class StaffDao {
         this.myDataSource = DS.getDataSource();
     }
 
-    public Staff verify_login(String login, String password) throws SQLException, NoSuchAlgorithmException {
+    public Staff verify_login(String login, String password) throws SQLException, NoSuchAlgorithmException, Exception {
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
 
@@ -42,12 +42,12 @@ public class StaffDao {
         stmt.setString(1, login);
         ResultSet rs = stmt.executeQuery();
 
-        byte[] passwordStored = null;
-        int id = 0;
-        String email = null;
-        String lastName = null; 
-        String firstName = null;
-        boolean isAdmin = false;
+        byte[] passwordStored;
+        int id;
+        String email;
+        String lastName; 
+        String firstName;
+        boolean isAdmin;
 
         if (rs.next()) {
             passwordStored = rs.getBytes("password");
@@ -57,6 +57,8 @@ public class StaffDao {
             firstName = rs.getString("first_name");
             isAdmin = rs.getBoolean("is_admin");
             
+        }else {
+            throw new Exception ("email does not match");
         }
 
         rs.close();
@@ -68,7 +70,8 @@ public class StaffDao {
             return new Staff(id, email, lastName, firstName, isAdmin);
 
         } else {
-            // TODO throw exception
+            
+            throw new Exception("passwords do not match");
         }
     }
 
