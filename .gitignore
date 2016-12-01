@@ -1,3 +1,4 @@
 *.dia~
 /webSchedule/nbproject/private/
 /webSchedule/build/
+/webSchedule/dist/

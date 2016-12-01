@@ -14,5 +14,19 @@ public class Degree {
     private int id;
     private String name;
     private int student_count;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getStudent_count() {
+        return student_count;
+    }
+    
+    
     
 }

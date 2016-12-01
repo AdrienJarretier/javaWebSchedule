@@ -22,5 +22,21 @@ public class Class_room {
         this.room_number = room_number;
         this.capacity = capacity;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public int getRoom_number() {
+        return room_number;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
     
 }

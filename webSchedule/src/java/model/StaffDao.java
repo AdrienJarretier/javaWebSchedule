@@ -26,9 +26,25 @@ public class StaffDao {
         this.myDataSource = DS.getDataSource();
     }
 
+    /**
+     * attempts to match the credentials with a staff member in the db if ok
+     * returns the staff entity if not, raises an exception
+     *
+     * @param login
+     * @param password
+     * @return the staff entity with these credentials
+     * @throws SQLException
+     * @throws NoSuchAlgorithmException if SHA-256 isn't valid
+     * @throws Exception if login error (either password or email invalid)
+     */
     public Staff verify_login(String login, String password) throws SQLException, NoSuchAlgorithmException, Exception {
 
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException ex) {
+            throw new NoSuchAlgorithmException("SHA-256 isn't valid");
+        }
 
         String saltedPassword = password + salt;
 
@@ -45,7 +61,7 @@ public class StaffDao {
         byte[] passwordStored;
         int id;
         String email;
-        String lastName; 
+        String lastName;
         String firstName;
         boolean isAdmin;
 
@@ -56,9 +72,9 @@ public class StaffDao {
             lastName = rs.getString("last_name");
             firstName = rs.getString("first_name");
             isAdmin = rs.getBoolean("is_admin");
-            
-        }else {
-            throw new Exception ("email does not match");
+
+        } else {
+            throw new Exception("email does not match");
         }
 
         rs.close();
@@ -70,14 +86,31 @@ public class StaffDao {
             return new Staff(id, email, lastName, firstName, isAdmin);
 
         } else {
-            
+
             throw new Exception("passwords do not match");
         }
     }
 
+    /**
+     *
+     * @param email
+     * @param first_name
+     * @param last_name
+     * @param password
+     * @param is_admin
+     * @return
+     * @throws NoSuchAlgorithmException if SHA-256 isn't valid
+     * @throws SQLException
+     */
     public int addStaff(String email, String first_name, String last_name, String password, boolean is_admin) throws NoSuchAlgorithmException, SQLException {
 
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        MessageDigest md;
+
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException ex) {
+            throw new NoSuchAlgorithmException("SHA-256 isn't valid");
+        }
 
         String saltedPassword = password + salt;
 

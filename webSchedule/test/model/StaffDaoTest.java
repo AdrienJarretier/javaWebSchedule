@@ -1,5 +1,9 @@
 package model;
 
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,22 +16,22 @@ import static org.junit.Assert.*;
  * @author freeze
  */
 public class StaffDaoTest {
-    
+
     public StaffDaoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -36,35 +40,86 @@ public class StaffDaoTest {
      * Test of verify_login method, of class StaffDao.
      */
     @Test
-    public void testVerify_login() throws Exception {
+    public void testVerify_login() {
         System.out.println("verify_login");
-        String login = "";
-        String password = "";
-        StaffDao instance = new StaffDao();
-        Staff expResult = null;
-        Staff result = instance.verify_login(login, password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String login = "hoche.genevieve@univ.fr";
+        String password = "psswdGen";
+
+        StaffDao instance;
+        try {
+            instance = new StaffDao();
+
+            try {
+                instance.verify_login(login, password);
+            } catch (NoSuchAlgorithmException ex) {
+                fail("hash algo error : " + ex.getMessage());
+            } catch (SQLException ex) {
+                fail("SQLException : " + ex.getMessage());
+            } catch (Exception ex) {
+                fail("found incorrect credentials : " + ex.getMessage());
+            }
+
+            login = "hoche.genevieve@univ.fr";
+            password = "Gen";
+
+            try {
+                instance.verify_login(login, password);
+                fail("should have found incorrect password");
+            } catch (NoSuchAlgorithmException ex) {
+                fail("hash algo error : " + ex.getMessage());
+            } catch (SQLException ex) {
+                fail("SQLException : " + ex.getMessage());
+            } catch (Exception ex) {
+            }
+
+            login = "hoch.genvieve@univ.fr";
+            password = "psswdGen";
+
+            try {
+                instance.verify_login(login, password);
+                fail("should have found incorrect email");
+            } catch (NoSuchAlgorithmException ex) {
+                fail("hash algo error : " + ex.getMessage());
+            } catch (SQLException ex) {
+                fail("SQLException : " + ex.getMessage());
+            } catch (Exception ex) {
+            }
+        } catch (SQLException ex) {
+            fail("constructor error : " + ex.getMessage());
+        }
     }
 
     /**
      * Test of addStaff method, of class StaffDao.
      */
     @Test
-    public void testAddStaff() throws Exception {
+    public void testAddStaff() {
         System.out.println("addStaff");
-        String email = "";
-        String first_name = "";
-        String last_name = "";
-        String password = "";
+
+        String email = "email@testAddStaff.test";
+        String first_name = "testAdd";
+        String last_name = "Staff";
+        String password = "5SVnrp";
         boolean is_admin = false;
-        StaffDao instance = new StaffDao();
-        int expResult = 0;
-        int result = instance.addStaff(email, first_name, last_name, password, is_admin);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        StaffDao instance;
+        try {
+            instance = new StaffDao();
+
+            try {
+                int idInserted = instance.addStaff(email, first_name, last_name, password, is_admin);
+
+                System.out.println("idInserted : " + idInserted);
+
+            } catch (NoSuchAlgorithmException ex) {
+                fail("hash algo error : " + ex.getMessage());
+            } catch (SQLException ex) {
+                fail("SQLException : " + ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            fail("constructor error : " + ex.getMessage());
+        }
     }
-    
+
 }
