@@ -48,7 +48,7 @@ public class LessonDAO {
      * @param time_start
      * @param teacher
      */
-    public void remove(Timestamp time_start, User teacher) {
+    public void remove(Timestamp time_start, Staff teacher) {
 
     }
 
@@ -71,7 +71,7 @@ public class LessonDAO {
      * @param teacher
      * @return
      */
-    public ArrayList<Lesson> getSchedule(Timestamp time_start, Timestamp time_end, User teacher) {
+    public ArrayList<Lesson> getSchedule(Timestamp time_start, Timestamp time_end, Staff teacher) {
 
     }
 

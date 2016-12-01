@@ -34,7 +34,7 @@ CREATE TABLE staff (
 	email VARCHAR(30) UNIQUE, 
 	first_name VARCHAR(30),
 	last_name VARCHAR(30), 
-	password VARCHAR(64),
+	password CHAR(32) FOR BIT DATA,
 	is_admin BOOLEAN
 );
 
