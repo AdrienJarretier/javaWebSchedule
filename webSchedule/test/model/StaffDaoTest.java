@@ -93,8 +93,8 @@ public class StaffDaoTest {
      * Test of addStaff method, of class StaffDao.
      */
     @Test
-    public void testAddStaff() {
-        System.out.println("addStaff");
+    public void testAddAndRemoveStaff() {
+        System.out.println("addAndRemoveStaff");
 
         String email = "email@testAddStaff.test";
         String first_name = "testAdd";
@@ -110,6 +110,8 @@ public class StaffDaoTest {
                 int idInserted = instance.addStaff(email, first_name, last_name, password, is_admin);
 
                 System.out.println("idInserted : " + idInserted);
+
+                instance.removeStaff(idInserted);
 
             } catch (NoSuchAlgorithmException ex) {
                 fail("hash algo error : " + ex.getMessage());

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.security.MessageDigest;
@@ -19,8 +14,8 @@ public class StaffDao {
 
     private final DataSource myDataSource;
 
-    private static final String staffTable = "staff";
-    private static final String salt = "C0mpl1c at33d.";
+    private static final String STAFF_TABLE = "staff";
+    private static final String SALT = "C0mpl1c at33d.";
 
     public StaffDao() throws SQLException {
         this.myDataSource = DS.getDataSource();
@@ -46,12 +41,12 @@ public class StaffDao {
             throw new NoSuchAlgorithmException("SHA-256 isn't valid");
         }
 
-        String saltedPassword = password + salt;
+        String saltedPassword = password + SALT;
 
         byte[] passwordBytes = saltedPassword.getBytes();
         byte[] passwordHashed = md.digest(passwordBytes);
 
-        String sql = "SELECT * FROM " + staffTable + " WHERE email = ?";
+        String sql = "SELECT * FROM " + STAFF_TABLE + " WHERE email = ?";
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
 
@@ -112,12 +107,12 @@ public class StaffDao {
             throw new NoSuchAlgorithmException("SHA-256 isn't valid");
         }
 
-        String saltedPassword = password + salt;
+        String saltedPassword = password + SALT;
 
         byte[] passwordBytes = saltedPassword.getBytes();
         byte[] passwordHashed = md.digest(passwordBytes);
 
-        String sql = "INSERT INTO " + staffTable + "(email, first_name, last_name, password, is_admin) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO " + STAFF_TABLE + "(email, first_name, last_name, password, is_admin) VALUES(?, ?, ?, ?, ?)";
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -144,7 +139,7 @@ public class StaffDao {
     }
     
     public void removeStaff (int id) throws SQLException{
-        String sql = "DELETE FROM " + staffTable + "WHERE id = ?";
+        String sql = "DELETE FROM " + STAFF_TABLE + " WHERE id = ?";
         
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);

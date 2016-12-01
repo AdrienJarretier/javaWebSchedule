@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.ArrayList;
 import javax.sql.DataSource;
 
 /**
@@ -19,7 +11,7 @@ import javax.sql.DataSource;
 public class LessonDAO {
     private final DataSource myDataSource;
 
-    private static final String lessonTable = "lesson";
+    private static final String LESSON_TABLE = "lesson";
     
     public LessonDAO() throws SQLException {
         this.myDataSource = DS.getDataSource();
@@ -30,9 +22,10 @@ public class LessonDAO {
      *
      * @param lesson the lesson to insert in the db
      * @return the id of the inserted row
+     * @throws java.sql.SQLException
      */
     public int add(Lesson lesson) throws SQLException {
-        String sql = "INSERT INTO " + lessonTable + 
+        String sql = "INSERT INTO " + LESSON_TABLE + 
                      "(time_start, time_end, title, class_room, teacher_id)" 
                  + "VALUES (?,?,?,?,?)";
         
@@ -65,9 +58,10 @@ public class LessonDAO {
      * delete the lesson with the specified id
      *
      * @param lessonId the id of the lesson to delete
+     * @throws java.sql.SQLException
      */
     public void remove(int lessonId) throws SQLException {
-        String sql = "DELETE FROM " + lessonTable + "WHERE ID = ?";
+        String sql = "DELETE FROM " + LESSON_TABLE + "WHERE ID = ?";
         
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -83,9 +77,10 @@ public class LessonDAO {
      *
      * @param time_start
      * @param class_room
+     * @throws java.sql.SQLException
      */
     public void remove(Timestamp time_start, Class_room class_room) throws SQLException {
-        String sql = "DELETE FROM " + lessonTable + "WHERE time_start = ? and class_room_id = ?";
+        String sql = "DELETE FROM " + LESSON_TABLE + "WHERE time_start = ? and class_room_id = ?";
         
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -102,9 +97,10 @@ public class LessonDAO {
      *
      * @param time_start
      * @param teacher
+     * @throws java.sql.SQLException
      */
     public void remove(Timestamp time_start, Staff teacher) throws SQLException {
-        String sql = "DELETE FROM " + lessonTable + "WHERE time_start = ? and teacher_id = ?";
+        String sql = "DELETE FROM " + LESSON_TABLE + "WHERE time_start = ? and teacher_id = ?";
         
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -121,9 +117,10 @@ public class LessonDAO {
      * all the columns for that record to match the lesson entity attributes
      *
      * @param lesson the lesson to be recorded
+     * @throws java.sql.SQLException
      */
     public void edit(Lesson lesson) throws SQLException {
-        String sql = "UPDATE " + lessonTable + "SET time_start = ?, "
+        String sql = "UPDATE " + LESSON_TABLE + "SET time_start = ?, "
                                              + "time_end = ?, "
                                              + "title = ?, "
                                              + "class_room_id = ?, "
