@@ -142,4 +142,15 @@ public class StaffDao {
 
         return generatedId;
     }
+    
+    public void removeStaff (int id) throws SQLException{
+        String sql = "DELETE FROM " + staffTable + "WHERE id = ?";
+        
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
 }
