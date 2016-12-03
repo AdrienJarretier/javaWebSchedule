@@ -60,10 +60,6 @@ public class StaffDao {
         String firstName;
         boolean isAdmin;
 
-        rs.close();
-        stmt.close();
-        connection.close();
-        
         if (rs.next()) {
             passwordStored = rs.getBytes("password");
             id = rs.getInt("id");
@@ -72,7 +68,15 @@ public class StaffDao {
             firstName = rs.getString("first_name");
             isAdmin = rs.getBoolean("is_admin");
 
+            rs.close();
+            stmt.close();
+            connection.close();
+
         } else {
+
+            rs.close();
+            stmt.close();
+            connection.close();
             throw new Exception("email does not match");
         }
 
@@ -132,10 +136,10 @@ public class StaffDao {
 
         return generatedId;
     }
-    
-    public void removeStaff (int id) throws SQLException{
+
+    public void removeStaff(int id) throws SQLException {
         String sql = "DELETE FROM " + STAFF_TABLE + " WHERE id = ?";
-        
+
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);
