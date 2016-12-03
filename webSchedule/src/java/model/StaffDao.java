@@ -147,4 +147,43 @@ public class StaffDao {
         stmt.close();
         connection.close();
     }
+
+    Staff getById(int staff_id) throws SQLException, Exception {
+
+        String sql = "SELECT * FROM " + STAFF_TABLE + " WHERE id = ?";
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setInt(1, staff_id);
+        ResultSet rs = stmt.executeQuery();
+
+        Class_room cr = null;
+
+        if (rs.next()) {
+
+            int id = rs.getInt("id");
+            String email = rs.getString("email");
+            String first_name = rs.getString("first_name");
+            String last_name = rs.getString("last_name");
+            boolean is_admin = rs.getBoolean("is_admin");
+
+            Staff st = new Staff(id, email, first_name, last_name, is_admin);
+
+            rs.close();
+            stmt.close();
+            connection.close();
+
+            return st;
+
+        } else {
+
+            rs.close();
+            stmt.close();
+            connection.close();
+
+            throw new Exception("this id does not match any staff member");
+
+        }
+    }
 }
