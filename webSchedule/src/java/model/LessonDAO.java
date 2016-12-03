@@ -9,36 +9,36 @@ import javax.sql.DataSource;
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
 public class LessonDAO {
+
     private final DataSource myDataSource;
 
     private static final String LESSON_TABLE = "lesson";
-    
+
     public LessonDAO() throws SQLException {
         this.myDataSource = DS.getDataSource();
     }
-    
+
     /**
      * insert a new lesson in the database
      *
-     * @param lesson the lesson to insert in the db
      * @return the id of the inserted row
      * @throws java.sql.SQLException
      */
-    public int add(Lesson lesson) throws SQLException {
-        String sql = "INSERT INTO " + LESSON_TABLE + 
-                     "(time_start, time_end, title, class_room, teacher_id)" 
-                 + "VALUES (?,?,?,?,?)";
-        
-        Connection connection = myDataSource.getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql);
+    public int add(Timestamp time_start, Timestamp time_end, String title, int class_room_id, int teacher_id) throws SQLException {
+        String sql = "INSERT INTO " + LESSON_TABLE
+                + "(time_start, time_end, title, class_room_id, teacher_id)"
+                + "VALUES (?,?,?,?,?)";
 
-        stmt.setTimestamp(1, lesson.getTimeStart());
-        stmt.setTimestamp(2, lesson.getTimeEnd());
-        stmt.setString(3, lesson.getTitle());
-        stmt.setInt(4, lesson.getClass_room_id());
-        stmt.setInt(5, lesson.getTeacher_id());
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        stmt.setTimestamp(1, time_start);
+        stmt.setTimestamp(2, time_end);
+        stmt.setString(3, title);
+        stmt.setInt(4, class_room_id);
+        stmt.setInt(5, teacher_id);
         stmt.execute();
-        
+
         ResultSet generatedKeys = stmt.getGeneratedKeys();
 
         int generatedId = 0;
@@ -62,10 +62,10 @@ public class LessonDAO {
      */
     public void remove(int lessonId) throws SQLException {
         String sql = "DELETE FROM " + LESSON_TABLE + " WHERE ID = ?";
-        
+
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        
+
         stmt.setInt(1, lessonId);
         stmt.execute();
         stmt.close();
@@ -81,10 +81,10 @@ public class LessonDAO {
      */
     public void remove(Timestamp time_start, Class_room class_room) throws SQLException {
         String sql = "DELETE FROM " + LESSON_TABLE + " WHERE time_start = ? and class_room_id = ?";
-        
+
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        
+
         stmt.setTimestamp(1, time_start);
         stmt.setInt(2, class_room.getId());
         stmt.execute();
@@ -101,10 +101,10 @@ public class LessonDAO {
      */
     public void remove(Timestamp time_start, Staff teacher) throws SQLException {
         String sql = "DELETE FROM " + LESSON_TABLE + " WHERE time_start = ? and teacher_id = ?";
-        
+
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        
+
         stmt.setTimestamp(1, time_start);
         stmt.setInt(2, teacher.getId());
         stmt.execute();
@@ -121,21 +121,21 @@ public class LessonDAO {
      */
     public void edit(Lesson lesson) throws SQLException {
         String sql = "UPDATE " + LESSON_TABLE + " SET time_start = ?, "
-                                             + "time_end = ?, "
-                                             + "title = ?, "
-                                             + "class_room_id = ?, "
-                                             + "teacher_id = ?";
-        
+                + "time_end = ?, "
+                + "title = ?, "
+                + "class_room_id = ?, "
+                + "teacher_id = ?";
+
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        
+
         stmt.setTimestamp(1, lesson.getTimeStart());
         stmt.setTimestamp(2, lesson.getTimeEnd());
         stmt.setString(3, lesson.getTitle());
         stmt.setInt(4, lesson.getClass_room_id());
         stmt.setInt(5, lesson.getTeacher_id());
         stmt.execute();
-        
+
         stmt.execute();
         stmt.close();
         connection.close();
@@ -150,7 +150,39 @@ public class LessonDAO {
      * @param teacher
      * @return
      */
-    public ArrayList<Lesson> getSchedule(Timestamp time_start, Timestamp time_end, Staff teacher) {
+    public ArrayList<Lesson> getSchedule(Timestamp time_start, Timestamp time_end, Staff teacher) throws SQLException {
+
+        int teacher_id = teacher.getId();
+
+        String sql = "SELECT * FROM " + LESSON_TABLE + " WHERE time_start >= ? and time_end <= ? and teacher_id = ?";
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setTimestamp(1, time_start);
+        stmt.setTimestamp(2, time_end);
+        stmt.setInt(3, teacher_id);
+        ResultSet rs = stmt.executeQuery();
+
+        ArrayList<Lesson> lessons = new ArrayList<>();
+
+        while (rs.next()) {
+
+            int id = rs.getInt("id");
+            Timestamp start = rs.getTimestamp("time_start");
+            Timestamp end = rs.getTimestamp("time_end");
+            String title = rs.getString("title");
+            int class_room_id = rs.getInt("class_room_id");
+
+            lessons.add(new Lesson(id, start, end, title, class_room_id, teacher_id));
+
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return lessons;
 
     }
 
