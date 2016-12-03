@@ -30,9 +30,9 @@ public class StaffDao {
      * @return the staff entity with these credentials
      * @throws SQLException
      * @throws NoSuchAlgorithmException if SHA-256 isn't valid
-     * @throws Exception if login error (either password or email invalid)
+     * @throws RuntimeException if login error (either password or email invalid)
      */
-    public Staff verify_login(String login, String password) throws SQLException, NoSuchAlgorithmException, Exception {
+    public Staff verify_login(String login, String password) throws SQLException, NoSuchAlgorithmException {
 
         MessageDigest md;
         try {
@@ -68,13 +68,17 @@ public class StaffDao {
             firstName = rs.getString("first_name");
             isAdmin = rs.getBoolean("is_admin");
 
-        } else {
-            throw new Exception("email does not match");
-        }
+            rs.close();
+            stmt.close();
+            connection.close();
 
-        rs.close();
-        stmt.close();
-        connection.close();
+        } else {
+
+            rs.close();
+            stmt.close();
+            connection.close();
+            throw new RuntimeException("email does not match");
+        }
 
         if (Arrays.equals(passwordHashed, passwordStored)) {
 
@@ -82,18 +86,13 @@ public class StaffDao {
 
         } else {
 
-            throw new Exception("passwords do not match");
+            throw new RuntimeException("passwords do not match");
         }
     }
 
     /**
      *
-     * @param email
-     * @param first_name
-     * @param last_name
-     * @param password
-     * @param is_admin
-     * @return
+     * @return the id of the inserted record
      * @throws NoSuchAlgorithmException if SHA-256 isn't valid
      * @throws SQLException
      */
@@ -137,15 +136,54 @@ public class StaffDao {
 
         return generatedId;
     }
-    
-    public void removeStaff (int id) throws SQLException{
+
+    public void removeStaff(int id) throws SQLException {
         String sql = "DELETE FROM " + STAFF_TABLE + " WHERE id = ?";
-        
+
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);
         stmt.execute();
         stmt.close();
         connection.close();
+    }
+
+    public Staff getById(int staff_id) throws SQLException, Exception {
+
+        String sql = "SELECT * FROM " + STAFF_TABLE + " WHERE id = ?";
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setInt(1, staff_id);
+        ResultSet rs = stmt.executeQuery();
+
+        Class_room cr = null;
+
+        if (rs.next()) {
+
+            int id = rs.getInt("id");
+            String email = rs.getString("email");
+            String first_name = rs.getString("first_name");
+            String last_name = rs.getString("last_name");
+            boolean is_admin = rs.getBoolean("is_admin");
+
+            Staff st = new Staff(id, email, first_name, last_name, is_admin);
+
+            rs.close();
+            stmt.close();
+            connection.close();
+
+            return st;
+
+        } else {
+
+            rs.close();
+            stmt.close();
+            connection.close();
+
+            throw new Exception("this id does not match any staff member");
+
+        }
     }
 }

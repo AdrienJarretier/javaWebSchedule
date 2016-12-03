@@ -2,8 +2,6 @@ package model;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -118,6 +116,31 @@ public class StaffDaoTest {
             } catch (SQLException ex) {
                 fail("SQLException : " + ex.getMessage());
             }
+
+        } catch (SQLException ex) {
+            fail("constructor error : " + ex.getMessage());
+        }
+    }
+
+    /**
+     * Test of getById method, of class StaffDao.
+     */
+    @Test
+    public void testGetById() throws Exception {
+        System.out.println("getById");
+        int staff_id = 3;
+
+        StaffDao instance;
+        try {
+            instance = new StaffDao();
+
+            Staff result = instance.getById(staff_id);
+
+            assertEquals(3, result.getId());
+            assertEquals("bernard.claude@univ.fr", result.getEmail());
+            assertEquals("Claude", result.getFirstName());
+            assertEquals("Bernard", result.getLastName());
+            assertEquals(false, result.getIsAdmin());
 
         } catch (SQLException ex) {
             fail("constructor error : " + ex.getMessage());
