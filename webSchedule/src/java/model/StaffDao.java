@@ -60,6 +60,10 @@ public class StaffDao {
         String firstName;
         boolean isAdmin;
 
+        rs.close();
+        stmt.close();
+        connection.close();
+        
         if (rs.next()) {
             passwordStored = rs.getBytes("password");
             id = rs.getInt("id");
@@ -71,10 +75,6 @@ public class StaffDao {
         } else {
             throw new Exception("email does not match");
         }
-
-        rs.close();
-        stmt.close();
-        connection.close();
 
         if (Arrays.equals(passwordHashed, passwordStored)) {
 
@@ -88,12 +88,7 @@ public class StaffDao {
 
     /**
      *
-     * @param email
-     * @param first_name
-     * @param last_name
-     * @param password
-     * @param is_admin
-     * @return
+     * @return the id of the inserted record
      * @throws NoSuchAlgorithmException if SHA-256 isn't valid
      * @throws SQLException
      */
