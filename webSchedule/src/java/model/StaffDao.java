@@ -30,9 +30,9 @@ public class StaffDao {
      * @return the staff entity with these credentials
      * @throws SQLException
      * @throws NoSuchAlgorithmException if SHA-256 isn't valid
-     * @throws Exception if login error (either password or email invalid)
+     * @throws RuntimeException if login error (either password or email invalid)
      */
-    public Staff verify_login(String login, String password) throws SQLException, NoSuchAlgorithmException, Exception {
+    public Staff verify_login(String login, String password) throws SQLException, NoSuchAlgorithmException {
 
         MessageDigest md;
         try {
@@ -77,7 +77,7 @@ public class StaffDao {
             rs.close();
             stmt.close();
             connection.close();
-            throw new Exception("email does not match");
+            throw new RuntimeException("email does not match");
         }
 
         if (Arrays.equals(passwordHashed, passwordStored)) {
@@ -86,7 +86,7 @@ public class StaffDao {
 
         } else {
 
-            throw new Exception("passwords do not match");
+            throw new RuntimeException("passwords do not match");
         }
     }
 
