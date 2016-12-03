@@ -34,7 +34,7 @@ class Class_roomDAO {
      * @throws SQLException
      * @throws Exception if no class room in the db matches with that id
      */
-    Class_room getById(int class_room_id) throws SQLException, Exception {
+    public Class_room getById(int class_room_id) throws SQLException, Exception {
 
         String sql = "SELECT * FROM " + CLASS_ROOM_TABLE + " WHERE id = ?";
 

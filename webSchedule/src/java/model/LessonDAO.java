@@ -141,6 +141,46 @@ public class LessonDAO {
         connection.close();
     }
 
+    public Lesson getById(int lesson_id) throws SQLException, Exception {
+
+        String sql = "SELECT * FROM " + LESSON_TABLE + " WHERE id = ?";
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setInt(1, lesson_id);
+        ResultSet rs = stmt.executeQuery();
+
+        Lesson lesson = null;
+
+        if (rs.next()) {
+
+            int id = rs.getInt("id");
+            Timestamp start = rs.getTimestamp("time_start");
+            Timestamp end = rs.getTimestamp("time_end");
+            String title = rs.getString("title");
+            int class_room_id = rs.getInt("class_room_id");
+            int teacher_id = rs.getInt("teacher_id");
+
+            lesson = new Lesson(id, start, end, title, class_room_id, teacher_id);
+
+            rs.close();
+            stmt.close();
+            connection.close();
+
+            return lesson;
+
+        } else {
+
+            rs.close();
+            stmt.close();
+            connection.close();
+
+            throw new Exception("this id does not match any lesson");
+
+        }
+    }
+
     /**
      *
      * get the schedule of a teacher

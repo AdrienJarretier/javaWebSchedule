@@ -148,7 +148,7 @@ public class StaffDao {
         connection.close();
     }
 
-    Staff getById(int staff_id) throws SQLException, Exception {
+    public Staff getById(int staff_id) throws SQLException, Exception {
 
         String sql = "SELECT * FROM " + STAFF_TABLE + " WHERE id = ?";
 
