@@ -16,8 +16,8 @@
         Please enter your email and password <br>
         
         <div style="color:red">${errorMessage}</div>
-                <form method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
-			login (email) : <input name='login'><br>
+                <form method="POST">
+                    login (email) : <input name='login' type='email'><br>
 			password : <input name='password' type='password'><br>
 			<input type='submit' name='action' value='login'>
 		</form>
