@@ -15,18 +15,27 @@
     <body>
         <h1> Welcome ! </h1>
         Edit lesson : <br>
-        
+
         <div style="color:red">${errorMessage}</div>
-                <form method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
-			Time start : <input name='time_start'><br>
-			Time end : <input name='time_end'><br>
-                        Title : <input name='title'><br>
-                        Class room : <input name='class_room'><br>
-                        Teacher : <input name='teacher'><br>
-			<input type='submit' name='action' value='Edit'>
-		</form>
-		
-        
-        
+        <form method="POST"> 
+            Time start : <input name='time_start' type='text' value='ok'><br>
+            Time end : <input name='time_end'><br>
+            Title : <input name='title'><br>
+            Class room : <select name = 'room'>
+                <option value='id'> texte </option>
+            </select>
+            <c:if test="${sessionScope.userEntity.getIsAdmin()}">
+                Teacher : <select name = 'teacher'>
+                <c:forEach var="teacherName" items="${teacherNames}">
+                     <option value='teacherName'> ${teacherNames.get} </option> 
+                </c:forEach>
+                  
+                </select>
+            </c:if>
+            <input type='submit' name='action' value='Edit'>
+        </form>
+
+
+
     </body>
 </html>
