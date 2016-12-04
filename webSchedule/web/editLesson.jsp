@@ -16,20 +16,23 @@
         <h1> Welcome ! </h1>
         Edit lesson : <br>
 
-        <div style="color:red">${errorMessage}</div>
         <form method="POST"> 
             Time start : <input name='time_start' type='text' value='ok'><br>
-            Time end : <input name='time_end'><br>
-            Title : <input name='title'><br>
-            Class room : <select name = 'room'>
-                <option value='id'> texte </option>
-            </select>
-            <c:if test="${sessionScope.userEntity.getIsAdmin()}">
-                Teacher : <select name = 'teacher'>
-                <c:forEach var="teacherName" items="${teacherNames}">
-                     <option value='teacherName'> ${teacherNames.get} </option> 
+            Time end : <input name='time_end' type='text'><br>
+            Title : <input name='title' type='text'><br>
+            Class room : <select name = 'room' type='text'>
+                <c:forEach var="rooms" items="${rooms}">
+                    <option value='${rooms.getId()}'> ${rooms.getBuilding()} ${rooms.getRoom_number()} ( ${teacherNames.getCapacity()} places) </option> 
                 </c:forEach>
-                  
+
+            </select>
+
+            <c:if test="${sessionScope.userEntity.getIsAdmin()}">
+                Teacher : <select name = 'teacher' type=''>
+                    <c:forEach var="teacherName" items="${teacherNames}">
+                        <option value='${teacher.getId()}'> ${teacherNames.getLastName()} ${teacherNames.getFirstName()} </option> 
+                    </c:forEach>
+
                 </select>
             </c:if>
             <input type='submit' name='action' value='Edit'>
