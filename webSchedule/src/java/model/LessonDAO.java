@@ -14,7 +14,6 @@ public class LessonDAO {
     private final DataSource myDataSource;
 
     private static final String LESSON_TABLE = "lesson";
-    private static final String PARTICIPANTS_TABLE = "lesson_participants";
 
     public LessonDAO() throws SQLException {
         this.myDataSource = DS.getDataSource();
@@ -51,22 +50,9 @@ public class LessonDAO {
 
         generatedKeys.close();
         stmt.close();
-
-        sql = "INSERT INTO " + PARTICIPANTS_TABLE
-                + "(degree_id, lesson_id)"
-                + " VALUES (?, ?)";
-
-        stmt = connection.prepareStatement(sql);
-
-        for (Degree participant : participants) {
-
-            stmt.setInt(1, participant.getId());
-            stmt.setInt(2, generatedId);
-            stmt.execute();
-        }
-
-        stmt.close();
         connection.close();
+
+        (new Lesson_participantsDAO()).add(participants, generatedId);
 
         return generatedId;
     }
@@ -78,17 +64,13 @@ public class LessonDAO {
      * @throws java.sql.SQLException
      */
     public void remove(int lessonId) throws SQLException {
-        String sql = "DELETE FROM " + PARTICIPANTS_TABLE + " WHERE lesson_id = ?";
+
+        (new Lesson_participantsDAO()).remove(lessonId);
+
+        String sql = "DELETE FROM " + LESSON_TABLE + " WHERE id = ?";
 
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-
-        stmt.setInt(1, lessonId);
-        stmt.execute();
-        stmt.close();
-
-        sql = "DELETE FROM " + LESSON_TABLE + " WHERE id = ?";
-        stmt = connection.prepareStatement(sql);
 
         stmt.setInt(1, lessonId);
         stmt.execute();
@@ -170,10 +152,11 @@ public class LessonDAO {
      */
     public void edit(Lesson lesson) throws SQLException {
         String sql = "UPDATE " + LESSON_TABLE + " SET time_start = ?, "
-                + "time_end = ?, "
-                + "title = ?, "
-                + "class_room_id = ?, "
-                + "teacher_id = ?";
+                + " time_end = ?, "
+                + " title = ?, "
+                + " class_room_id = ?, "
+                + " teacher_id = ?"
+                + " WHERE id = ? ";
 
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -183,32 +166,20 @@ public class LessonDAO {
         stmt.setString(3, lesson.getTitle());
         stmt.setInt(4, lesson.getClass_room().getId());
         stmt.setInt(5, lesson.getTeacher().getId());
-        stmt.execute();
-
-        stmt.execute();
-        stmt.close();
-
-        sql = "UPDATE " + PARTICIPANTS_TABLE + " SET degree_id = ?, "
-                + "time_end = ?, "
-                + "title = ?, "
-                + "class_room_id = ?, "
-                + "teacher_id = ?";
-
-        Connection connection = myDataSource.getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql);
-
-        stmt.setTimestamp(1, lesson.getTimeStart());
-        stmt.setTimestamp(2, lesson.getTimeEnd());
-        stmt.setString(3, lesson.getTitle());
-        stmt.setInt(4, lesson.getClass_room().getId());
-        stmt.setInt(5, lesson.getTeacher().getId());
+        stmt.setInt(6, lesson.getId());
         stmt.execute();
 
         stmt.execute();
         stmt.close();
         connection.close();
 
-        connection.close();
+        // delete all lesson_participant for that lesson id
+        // then for each participants we will add those participants
+        Lesson_participantsDAO parts = new Lesson_participantsDAO();
+
+        parts.remove(lesson.getId());
+
+        parts.add(lesson.getParticipants(), lesson.getId());
     }
 
     /**
@@ -241,7 +212,7 @@ public class LessonDAO {
 
             Class_room class_room = (new Class_roomDAO()).getById(class_room_id);
             Staff teacher = (new StaffDAO()).getById(teacher_id);
-            ArrayList<Degree> participants = (new DegreeDAO()).getParticipants(lesson_id);
+            ArrayList<Degree> participants = (new Lesson_participantsDAO()).getParticipants(lesson_id);
 
             Lesson lesson = new Lesson(id, start, end, title, class_room, teacher, participants);
 
@@ -289,7 +260,7 @@ public class LessonDAO {
 
             Staff teacher = new Staff(teacher_id, email, first_name, last_name, Boolean.FALSE);
 
-            lessons.add(new Lesson(lesson_id, start, end, title, class_room, teacher, (new DegreeDAO()).getParticipants(lesson_id)));
+            lessons.add(new Lesson(lesson_id, start, end, title, class_room, teacher, (new Lesson_participantsDAO()).getParticipants(lesson_id)));
 
         }
 

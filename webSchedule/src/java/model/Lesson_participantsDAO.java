@@ -17,14 +17,14 @@ import model.entities.Degree;
  *
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
-public class DegreeDAO {
+public class Lesson_participantsDAO {
 
     private final DataSource myDataSource;
 
     private static final String DEGREE_TABLE = "degree";
     private static final String PARTICIPANTS_TABLE = "lesson_participants";
 
-    public DegreeDAO() throws SQLException {
+    public Lesson_participantsDAO() throws SQLException {
         this.myDataSource = DS.getDataSource();
     }
 
@@ -59,6 +59,54 @@ public class DegreeDAO {
         connection.close();
 
         return participants;
+    }
+
+    /**
+     * insert all participants of the lesson in the table lesson_participants
+     *
+     * @param participants the list of degrees that will attend the lesson
+     * @param lessonId the id of the lesson to attend
+     */
+    void add(ArrayList<Degree> participants, int lessonId) throws SQLException {
+
+        String sql = "INSERT INTO " + PARTICIPANTS_TABLE
+                + "(degree_id, lesson_id)"
+                + " VALUES (?, ?)";
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        for (Degree participant : participants) {
+
+            stmt.setInt(1, participant.getId());
+            stmt.setInt(2, lessonId);
+            stmt.execute();
+        }
+
+        stmt.close();
+        connection.close();
+
+    }
+
+    /**
+     * Removes all participants from a lesson
+     *
+     * @param lessonId the id of the lesson from witch all participants should
+     * be removed
+     */
+    void remove(int lessonId) throws SQLException {
+
+        String sql = "DELETE FROM " + PARTICIPANTS_TABLE
+                + " WHERE lesson_id = ? ";
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setInt(1, lessonId);
+        stmt.execute();
+        stmt.close();
+        connection.close();
+
     }
 
 }
