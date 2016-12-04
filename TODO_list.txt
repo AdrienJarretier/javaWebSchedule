@@ -4,4 +4,4 @@ in LessonDAO : when updating or adding a new lesson, check if available :
 				- new methode AvailableSLot : check if the given slot with either the teacher and class room is available. Te degress should be available too.
 				use this method to check if you can put this lesson at that time
 
-
+better DB with unicity constraints and not null contraints where necessary
