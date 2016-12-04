@@ -48,14 +48,9 @@ public class LoginController extends HttpServlet {
             Staff user = dao.verify_login(p1, p2);
             
             request.getSession().setAttribute("userEntity", user);
-                
-            if(user.getIsAdmin()){
-                jspView = "staff.jsp";
-            }
-            else{
-                jspView = "teacher.jsp";
-            }
-            
+              
+            jspView = "staffController";
+          
             
         }catch (DAOException e){
             
@@ -63,7 +58,6 @@ public class LoginController extends HttpServlet {
             request.setAttribute("errorMessage", "incorrect email or password");
             
         }
-        
         
         request.getRequestDispatcher(jspView).forward(request, response);
     }

@@ -10,11 +10,6 @@
 --%>
 
 
-<%--
-    La servlet fait : session.setAttribute("customer", customer)
-    La JSP récupère cette valeur dans ${customer}
---%>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -23,33 +18,35 @@
     <body>
         <h1>Welcome Mr. ${sessionScope.userEntity.getLastName()}</h1>
         Here are all lessons : 
-        
+
         <c:choose>
-            <%-- Si la liste est vide --%>
-            <c:when test="${empty customers}">
-                <%-- On pourrait aussi écrire ${customers.isEmpty()} (cf. java.util.List) --%>
-                State ${param.state} has no customers.			
+
+            <c:when test="${empty lessons}">
+                No lessons to display			
             </c:when>
-            <c:otherwise> <%-- La liste n'est pas vide %-_>
-		<%-- Pour chaque client dans la liste --%>
-        
-            <c:forEach var="lesson" varStatus="status" items="${lessons}">
-                <c:if test="${status.first}">
-                    <table border="1">
-                        <tr><th>Id</th><th>Time_start</th><th>Time_end</th><th>Title</th><th>Class_room</th><th>Teacher</th></tr>
-                </c:if>
-                <%-- On met une ligne dans la table --%>
-		<%-- Les noms de propriétés correspondent aux "propriétés" java exportées par CustomerEntity (ex: getName() ) --%>
-                <tr><td>${lesson.getId()}</td><td>${lesson.getTime_start}</td><td>${lesson.time_end}</td><td>${lesson.title}</td><td>${lesson.class_room_id}</td><td>${lesson.teacher_id}</td></tr>
-            </c:forEach>
                 
-            
-        </table>
-        <form method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
-            <input type='submit' name='action' value='Logout'>
-            <input type='submit' name='action' value='Add lesson'>
-        </form>
-	
+            <c:otherwise> 
+
+                <table border="1">
+                    <tr><th>Id</th><th>Time_start</th><th>Time_end</th><th>Title</th><th>Class_room</th><th>Teacher</th></tr>
+
+                    <c:forEach var="lesson" items="${lessons}">
+
+                        <tr><td>${lesson.getId()}</td><td>${lesson.getTimeStart()}</td><td>${lesson.getTimeEnd()}</td><td>${lesson.getTitle()}</td><td>${lesson.getClass_room_id()}</td><td>${lesson.getTeacher_id()}</td></tr>
+                        
+                    </c:forEach>
+
+                    <!--                        <form method="POST"> 
+                                                <input type='submit' name='action' value='Logout'>
+                                                <input type='submit' name='action' value='Add lesson'>
+                                            </form>-->
+
+                </table>
+                
+            </c:otherwise>
+                
+        </c:choose>
+
         <c:import url="nav.jsp" />
     </body>
 </html>
