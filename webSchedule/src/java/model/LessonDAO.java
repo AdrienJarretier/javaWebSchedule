@@ -1,7 +1,6 @@
 package model;
 
 import model.entities.Lesson;
-import model.entities.Degree;
 import model.entities.Staff;
 import model.entities.Class_room;
 import java.sql.*;
@@ -146,11 +145,11 @@ public class LessonDAO {
     }
 
     /**
-     * 
+     *
      * @param lesson_id
      * @return
      * @throws SQLException
-     * @throws DAOException 
+     * @throws DAOException
      */
     public Lesson getById(int lesson_id) throws SQLException, DAOException {
 
@@ -192,27 +191,8 @@ public class LessonDAO {
         }
     }
 
-    /**
-     *
-     * get the schedule of a teacher
-     *
-     * @param time_start
-     * @param time_end
-     * @param teacher
-     * @return
-     */
-    public ArrayList<Lesson> getSchedule(Timestamp time_start, Timestamp time_end, Staff teacher) throws SQLException {
+    private ArrayList<Lesson> getLessons(PreparedStatement stmt) throws SQLException {
 
-        int teacher_id = teacher.getId();
-
-        String sql = "SELECT * FROM " + LESSON_TABLE + " WHERE time_start >= ? and time_end <= ? and teacher_id = ?";
-
-        Connection connection = myDataSource.getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql);
-
-        stmt.setTimestamp(1, time_start);
-        stmt.setTimestamp(2, time_end);
-        stmt.setInt(3, teacher_id);
         ResultSet rs = stmt.executeQuery();
 
         ArrayList<Lesson> lessons = new ArrayList<>();
@@ -224,12 +204,58 @@ public class LessonDAO {
             Timestamp end = rs.getTimestamp("time_end");
             String title = rs.getString("title");
             int class_room_id = rs.getInt("class_room_id");
+            int teacher_id = rs.getInt("teacher_id");
 
             lessons.add(new Lesson(id, start, end, title, class_room_id, teacher_id));
 
         }
 
         rs.close();
+
+        return lessons;
+    }
+
+    /**
+     *
+     * get the complete scheduler
+     *
+     * @return the list of all the lessons, past and future
+     * @throws java.sql.SQLException
+     */
+    public ArrayList<Lesson> getSchedule() throws SQLException {
+
+        String sql = "SELECT * FROM " + LESSON_TABLE;
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        ArrayList<Lesson> lessons = getLessons(stmt);
+
+        stmt.close();
+        connection.close();
+
+        return lessons;
+    }
+
+    /**
+     *
+     * get the schedule of a teacher
+     *
+     * @param teacher the teacher we want the lessons of
+     * @return the list of all the lessons of a teacher
+     * @throws java.sql.SQLException
+     */
+    public ArrayList<Lesson> getSchedule(Staff teacher) throws SQLException {
+
+        String sql = "SELECT * FROM " + LESSON_TABLE + " WHERE teacher_id = ?";
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setInt(1, teacher.getId());
+
+        ArrayList<Lesson> lessons = getLessons(stmt);
+
         stmt.close();
         connection.close();
 
@@ -237,29 +263,4 @@ public class LessonDAO {
 
     }
 
-    /**
-     *
-     * get the schedule for a degree
-     *
-     * @param time_start
-     * @param time_end
-     * @param degree
-     * @return
-     */
-    public ArrayList<Lesson> getSchedule(Timestamp time_start, Timestamp time_end, Degree degree) {
-
-    }
-
-    /**
-     *
-     * get the schedule of a class room
-     *
-     * @param time_start
-     * @param time_end
-     * @param class_room
-     * @return
-     */
-    public ArrayList<Lesson> getSchedule(Timestamp time_start, Timestamp time_end, Class_room class_room) {
-
-    }
 }
