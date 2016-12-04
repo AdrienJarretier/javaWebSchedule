@@ -47,7 +47,6 @@
             </c:otherwise>
                 
         </c:choose>
-
-        <c:import url="nav.jsp" />
+                
     </body>
 </html>
