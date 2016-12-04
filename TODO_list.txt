@@ -5,3 +5,6 @@ in LessonDAO : when updating or adding a new lesson, check if available :
 				use this method to check if you can put this lesson at that time
 
 better DB with unicity constraints and not null contraints where necessary
+
+when adding a lesson, check if end is greater than start
+check if room capacity is greter than degree student count (sum of all degrees participing)
