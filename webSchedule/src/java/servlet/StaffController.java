@@ -35,22 +35,21 @@ public class StaffController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
+
         Staff user = (Staff) request.getSession().getAttribute("userEntity");
-        String jspView; 
+        String jspView;
         LessonDAO l = new LessonDAO();
-        
-        if(user.getIsAdmin()){
-                ArrayList<Lesson> lessons = l.getSchedule();
-                request.getSession().setAttribute("lessons", lessons);
-                jspView = "staff.jsp";
-            }
-        
-            else{
-                ArrayList<Lesson> lessons = l.getSchedule(user);
-                request.getSession().setAttribute("lessons", lessons);
-                jspView = "teacher.jsp";
-            }
-        
+
+        if (user.getIsAdmin()) {
+            ArrayList<Lesson> lessons = l.getSchedule();
+            request.getSession().setAttribute("lessons", lessons);
+            jspView = "staff.jsp";
+        } else {
+            ArrayList<Lesson> lessons = l.getSchedule(user);
+            request.getSession().setAttribute("lessons", lessons);
+            jspView = "teacher.jsp";
+        }
+
         request.getRequestDispatcher(jspView).forward(request, response);
     }
 

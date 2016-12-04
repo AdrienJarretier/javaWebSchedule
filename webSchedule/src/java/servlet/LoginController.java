@@ -49,7 +49,7 @@ public class LoginController extends HttpServlet {
             
             request.getSession().setAttribute("userEntity", user);
               
-            jspView = "staffController";
+            jspView = "StaffController";
           
             
         }catch (DAOException e){
