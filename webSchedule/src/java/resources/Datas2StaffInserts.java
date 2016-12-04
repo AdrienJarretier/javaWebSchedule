@@ -22,7 +22,7 @@ public class Datas2StaffInserts {
 
         StaffDAO staffDao = new StaffDAO();
 
-        staffDao.addStaff("bertrand.françois@univ.fr", "François", "Bertrand", "psswdFra", false);
+        staffDao.addStaff("bertrand.francois@univ.fr", "François", "Bertrand", "psswdFra", false);
         staffDao.addStaff("gallard.julien@univ.fr", "Julien", "Gallard", "psswdJul", false);
         staffDao.addStaff("bernard.claude@univ.fr", "Claude", "Bernard", "psswdCla", false);
         staffDao.addStaff("salma.juliette@univ.fr", "Juliette", "Salma", "psswdJul", false);
