@@ -4,26 +4,33 @@
  * and open the template in the editor.
  */
 package model.entities;
+
 import java.sql.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author Laurie
  */
 public class Lesson {
+
     private int id;
     private Timestamp timeStart;
     private Timestamp timeEnd;
     private String title;
-    private int class_room_id;
-    private int teacher_id;
+    private Class_room class_room;
+    private Staff teacher;
 
-    public Lesson(int id, Timestamp timeStart, Timestamp timeEnd, String title, int class_room_id, int teacher_id) {
+    private ArrayList<Degree> participants;
+
+    public Lesson(int id, Timestamp timeStart, Timestamp timeEnd, String title, Class_room class_room, Staff teacher, ArrayList<Degree> participants) {
         this.id = id;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.title = title;
-        this.class_room_id = class_room_id;
-        this.teacher_id = teacher_id;
+        this.class_room = class_room;
+        this.teacher = teacher;
+        this.participants = participants;
     }
 
     public int getId() {
@@ -42,14 +49,16 @@ public class Lesson {
         return title;
     }
 
-    public int getClass_room_id() {
-        return class_room_id;
+    public Class_room getClass_room() {
+        return class_room;
     }
 
-    public int getTeacher_id() {
-        return teacher_id;
+    public Staff getTeacher() {
+        return teacher;
     }
-    
-    
-    
+
+    public ArrayList<Degree> getParticipants() {
+        return participants;
+    }
+
 }

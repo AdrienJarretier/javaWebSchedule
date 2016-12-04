@@ -4,7 +4,7 @@
  */
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-11-24 14:30:00', '2016-11-24 16:30:00', 'Structure de données', (SELECT id from class_room WHERE building = 'Multimedia' AND room_nb = 104), (SELECT id from staff WHERE email = 'bertrand.françois@univ.fr'));
+('2016-11-24 14:30:00', '2016-11-24 16:30:00', 'Structure de données', (SELECT id from class_room WHERE building = 'Multimedia' AND room_nb = 104), (SELECT id from staff WHERE email = 'bertrand.francois@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L2 informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY) );
