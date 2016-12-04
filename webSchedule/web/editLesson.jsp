@@ -22,15 +22,15 @@
             Title : <input name='title' type='text' value=${lesson.getTitle()}><br>
             Class room : <select name = 'room' type='text' value=${lesson.getClass_room()}>
                 <c:forEach var="rooms" items="${rooms}">
-                    <option value='${rooms.getId()}'> ${rooms.getBuilding()} ${rooms.getRoom_number()} ( ${teacherNames.getCapacity()} places) </option> 
+                    <option value='${rooms.getId()}'> ${rooms.getBuilding()} ${rooms.getRoom_number()} ( ${rooms.getCapacity()} places) </option> 
                 </c:forEach>
 
             </select>
 
             <c:if test="${sessionScope.userEntity.getIsAdmin()}">
                 Teacher : <select name = 'teacher' type='text' value=${lesson.getTeacher()}>
-                    <c:forEach var="teacherName" items="${teacherNames}">
-                        <option value='${teacher.getId()}'> ${teacherNames.getLastName()} ${teacherNames.getFirstName()} </option> 
+                    <c:forEach var="teacher" items="${teacherNames}">
+                        <option value='${teacher.getId()}'> ${teacher.getLastName()} ${teacher.getFirstName()} </option> 
                     </c:forEach>
 
                 </select>
