@@ -43,4 +43,5 @@ INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALU
 ('2016-10-23 13:45:00', '2016-10-23 15:15:00', 'Théorie des graphes', (SELECT id from class_room WHERE building = 'Multimedia' AND room_nb = 206), (SELECT id from staff WHERE email = 'gallard.julien@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
-((SELECT id FROM degree WHERE name = 'L3 informatique' AND name = 'L3 Mathématiques'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY));
+((SELECT id FROM degree WHERE name = 'L3 informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY)),
+((SELECT id FROM degree WHERE name = 'L3 Mathématiques'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY));
