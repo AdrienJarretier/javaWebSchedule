@@ -7,11 +7,15 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.entities.Class_room;
+import model.entities.Lesson;
+import model.entities.Staff;
 
 /**
  *
@@ -31,6 +35,8 @@ public class BottomEditController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String l = request.getParameter("lesson");
         
     }
 
