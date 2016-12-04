@@ -5,6 +5,10 @@
  */
 package model;
 
+import model.entities.Degree;
+import model.entities.Staff;
+import model.entities.Class_room;
+import model.entities.Lesson;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -94,7 +98,7 @@ public class LessonDAOTest {
 
             fail("SQLException : " + ex.getMessage());
 
-        } catch (Exception ex) {
+        } catch (DAOException ex) {
 
             fail("no class room in the db matches with that id ");
         }
@@ -131,18 +135,18 @@ public class LessonDAOTest {
         int class_room_id = 2;
         int teacher_id = 3;
 
-        StaffDao stDao;
+        StaffDAO stDao;
         Staff st = null;
 
         try {
-            stDao = new StaffDao();
+            stDao = new StaffDAO();
             st = stDao.getById(teacher_id);
 
         } catch (SQLException ex) {
 
             fail("SQLException : " + ex.getMessage());
 
-        } catch (Exception ex) {
+        } catch (DAOException ex) {
 
             fail("no staff member in the db matches with that id ");
         }
@@ -180,7 +184,7 @@ public class LessonDAOTest {
     }
 
     @Test
-    public void testGetById() throws Exception {
+    public void testGetById() {
         System.out.println("getById");
         int lesson_id = 3;
 

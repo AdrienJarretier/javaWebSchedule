@@ -1,5 +1,9 @@
 package model;
 
+import model.entities.Lesson;
+import model.entities.Degree;
+import model.entities.Staff;
+import model.entities.Class_room;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.sql.DataSource;
@@ -141,7 +145,14 @@ public class LessonDAO {
         connection.close();
     }
 
-    public Lesson getById(int lesson_id) throws SQLException, Exception {
+    /**
+     * 
+     * @param lesson_id
+     * @return
+     * @throws SQLException
+     * @throws DAOException 
+     */
+    public Lesson getById(int lesson_id) throws SQLException, DAOException {
 
         String sql = "SELECT * FROM " + LESSON_TABLE + " WHERE id = ?";
 
@@ -176,7 +187,7 @@ public class LessonDAO {
             stmt.close();
             connection.close();
 
-            throw new Exception("this id does not match any lesson");
+            throw new DAOException("this id does not match any lesson");
 
         }
     }

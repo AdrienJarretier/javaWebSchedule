@@ -5,6 +5,7 @@
  */
 package model;
 
+import model.entities.Class_room;
 import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;

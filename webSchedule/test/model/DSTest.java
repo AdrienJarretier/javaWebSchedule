@@ -29,7 +29,7 @@ public class DSTest {
      * Test of getDataSource method, of class DS.
      */
     @Test
-    public void testGetDataSource() throws Exception {
+    public void testGetDataSource() {
         System.out.println("getDataSource");
         try{
             DataSource result = DS.getDataSource();

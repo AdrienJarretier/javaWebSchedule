@@ -1,5 +1,6 @@
 package model;
 
+import model.entities.Staff;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import org.junit.After;
@@ -35,7 +36,7 @@ public class StaffDaoTest {
     }
 
     /**
-     * Test of verify_login method, of class StaffDao.
+     * Test of verify_login method, of class StaffDAO.
      */
     @Test
     public void testVerify_login() {
@@ -43,9 +44,9 @@ public class StaffDaoTest {
         String login = "hoche.genevieve@univ.fr";
         String password = "psswdGen";
 
-        StaffDao instance;
+        StaffDAO instance;
         try {
-            instance = new StaffDao();
+            instance = new StaffDAO();
 
             try {
                 instance.verify_login(login, password);
@@ -53,7 +54,7 @@ public class StaffDaoTest {
                 fail("hash algo error : " + ex.getMessage());
             } catch (SQLException ex) {
                 fail("SQLException : " + ex.getMessage());
-            } catch (Exception ex) {
+            } catch (DAOException ex) {
                 fail("found incorrect credentials : " + ex.getMessage());
             }
 
@@ -67,7 +68,7 @@ public class StaffDaoTest {
                 fail("hash algo error : " + ex.getMessage());
             } catch (SQLException ex) {
                 fail("SQLException : " + ex.getMessage());
-            } catch (Exception ex) {
+            } catch (DAOException ex) {
             }
 
             login = "hoch.genvieve@univ.fr";
@@ -80,7 +81,7 @@ public class StaffDaoTest {
                 fail("hash algo error : " + ex.getMessage());
             } catch (SQLException ex) {
                 fail("SQLException : " + ex.getMessage());
-            } catch (Exception ex) {
+            } catch (DAOException ex) {
             }
         } catch (SQLException ex) {
             fail("constructor error : " + ex.getMessage());
@@ -88,7 +89,7 @@ public class StaffDaoTest {
     }
 
     /**
-     * Test of addStaff method, of class StaffDao.
+     * Test of addStaff method, of class StaffDAO.
      */
     @Test
     public void testAddAndRemoveStaff() {
@@ -100,9 +101,9 @@ public class StaffDaoTest {
         String password = "5SVnrp";
         boolean is_admin = false;
 
-        StaffDao instance;
+        StaffDAO instance;
         try {
-            instance = new StaffDao();
+            instance = new StaffDAO();
 
             try {
                 int idInserted = instance.addStaff(email, first_name, last_name, password, is_admin);
@@ -123,16 +124,16 @@ public class StaffDaoTest {
     }
 
     /**
-     * Test of getById method, of class StaffDao.
+     * Test of getById method, of class StaffDAO.
      */
     @Test
-    public void testGetById() throws Exception {
+    public void testGetById() {
         System.out.println("getById");
         int staff_id = 3;
 
-        StaffDao instance;
+        StaffDAO instance;
         try {
-            instance = new StaffDao();
+            instance = new StaffDAO();
 
             Staff result = instance.getById(staff_id);
 
@@ -144,6 +145,8 @@ public class StaffDaoTest {
 
         } catch (SQLException ex) {
             fail("constructor error : " + ex.getMessage());
+        } catch (DAOException ex) {
+            fail("DAOException : " + ex.getMessage());
         }
     }
 
