@@ -7,7 +7,7 @@ package resources;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import model.StaffDao;
+import model.StaffDAO;
 
 /**
  *
@@ -20,7 +20,7 @@ public class Datas2StaffInserts {
      */
     public static void main(String[] args) throws SQLException, NoSuchAlgorithmException {
 
-        StaffDao staffDao = new StaffDao();
+        StaffDAO staffDao = new StaffDAO();
 
         staffDao.addStaff("bertrand.françois@univ.fr", "François", "Bertrand", "psswdFra", false);
         staffDao.addStaff("gallard.julien@univ.fr", "Julien", "Gallard", "psswdJul", false);

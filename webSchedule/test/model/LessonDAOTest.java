@@ -131,11 +131,11 @@ public class LessonDAOTest {
         int class_room_id = 2;
         int teacher_id = 3;
 
-        StaffDao stDao;
+        StaffDAO stDao;
         Staff st = null;
 
         try {
-            stDao = new StaffDao();
+            stDao = new StaffDAO();
             st = stDao.getById(teacher_id);
 
         } catch (SQLException ex) {

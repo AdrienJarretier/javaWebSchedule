@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Staff;
-import model.StaffDao;
+import model.StaffDAO;
 
 /**
  *
@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
         String p1 = request.getParameter("login");
         String p2 = request.getParameter("password");
         
-        StaffDao dao = new StaffDao(); 
+        StaffDAO dao = new StaffDAO(); 
         
         String jspView; 
         try{

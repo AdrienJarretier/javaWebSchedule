@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import javax.sql.DataSource;
 
 /**
@@ -32,9 +26,9 @@ class Class_roomDAO {
      * @param class_room_id the id of the requested class room
      * @return a Class_room entity
      * @throws SQLException
-     * @throws Exception if no class room in the db matches with that id
+     * @throws DAOException if no class room in the db matches with that id
      */
-    public Class_room getById(int class_room_id) throws SQLException, Exception {
+    public Class_room getById(int class_room_id) throws SQLException, DAOException {
 
         String sql = "SELECT * FROM " + CLASS_ROOM_TABLE + " WHERE id = ?";
 
@@ -67,7 +61,7 @@ class Class_roomDAO {
             stmt.close();
             connection.close();
 
-            throw new Exception("this id does not match any class room");
+            throw new DAOException("this id does not match any class room");
 
         }
     }

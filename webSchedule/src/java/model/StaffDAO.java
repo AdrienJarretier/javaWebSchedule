@@ -10,14 +10,14 @@ import javax.sql.DataSource;
  *
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
-public class StaffDao {
+public class StaffDAO {
 
     private final DataSource myDataSource;
 
     private static final String STAFF_TABLE = "staff";
     private static final String SALT = "C0mpl1c at33d.";
 
-    public StaffDao() throws SQLException {
+    public StaffDAO() throws SQLException {
         this.myDataSource = DS.getDataSource();
     }
 
@@ -30,9 +30,9 @@ public class StaffDao {
      * @return the staff entity with these credentials
      * @throws SQLException
      * @throws NoSuchAlgorithmException if SHA-256 isn't valid
-     * @throws RuntimeException if login error (either password or email invalid)
+     * @throws DAOException if login error (either password or email invalid)
      */
-    public Staff verify_login(String login, String password) throws SQLException, NoSuchAlgorithmException {
+    public Staff verify_login(String login, String password) throws SQLException, NoSuchAlgorithmException, DAOException {
 
         MessageDigest md;
         try {
@@ -86,7 +86,7 @@ public class StaffDao {
 
         } else {
 
-            throw new RuntimeException("passwords do not match");
+            throw new DAOException("passwords do not match");
         }
     }
 
@@ -148,7 +148,14 @@ public class StaffDao {
         connection.close();
     }
 
-    public Staff getById(int staff_id) throws SQLException, Exception {
+    /**
+     * 
+     * @param staff_id
+     * @return
+     * @throws SQLException
+     * @throws DAOException if id does not match any staff member
+     */
+    public Staff getById(int staff_id) throws SQLException, DAOException {
 
         String sql = "SELECT * FROM " + STAFF_TABLE + " WHERE id = ?";
 
@@ -182,7 +189,7 @@ public class StaffDao {
             stmt.close();
             connection.close();
 
-            throw new Exception("this id does not match any staff member");
+            throw new DAOException("this id does not match any staff member");
 
         }
     }
