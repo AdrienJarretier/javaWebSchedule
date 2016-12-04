@@ -13,7 +13,7 @@ import model.StaffDao;
  *
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
-public class StaffInserts {
+public class Datas2StaffInserts {
 
     /**
      * @param args the command line arguments

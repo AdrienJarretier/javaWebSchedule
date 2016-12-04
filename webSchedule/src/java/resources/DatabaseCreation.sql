@@ -8,11 +8,11 @@
  * Created: 30 nov. 2016
  */
 
--- DROP TABLE lesson_participants;
--- DROP TABLE lesson;
--- DROP TABLE staff;
--- DROP TABLE degree;
--- DROP TABLE class_room;
+ DROP TABLE lesson_participants;
+ DROP TABLE lesson;
+ DROP TABLE staff;
+ DROP TABLE degree;
+ DROP TABLE class_room;
 
 CREATE TABLE class_room (
 	id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),

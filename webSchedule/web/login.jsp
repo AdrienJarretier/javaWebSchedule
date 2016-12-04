@@ -16,7 +16,7 @@
         Please enter your email and password <br>
         
         <div style="color:red">${errorMessage}</div>
-                <form method="POST">
+                <form method="POST" action='LoginController'>
                     login (email) : <input name='login' type='email'><br>
 			password : <input name='password' type='password'><br>
 			<input type='submit' name='action' value='login'>

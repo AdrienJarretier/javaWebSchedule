@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
             
             request.getSession().setAttribute("userEntity", user);
                 
-            if(user.getIs_admin()){
+            if(user.getIsAdmin()){
                 jspView = "staff.jsp";
             }
             else{
