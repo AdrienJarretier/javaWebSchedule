@@ -1,5 +1,9 @@
 package model;
 
+import model.entities.Lesson;
+import model.entities.Degree;
+import model.entities.Staff;
+import model.entities.Class_room;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.sql.DataSource;

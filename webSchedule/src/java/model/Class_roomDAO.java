@@ -1,5 +1,6 @@
 package model;
 
+import model.entities.Class_room;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

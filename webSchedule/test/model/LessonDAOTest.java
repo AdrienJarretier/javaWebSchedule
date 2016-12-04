@@ -5,6 +5,10 @@
  */
 package model;
 
+import model.entities.Degree;
+import model.entities.Staff;
+import model.entities.Class_room;
+import model.entities.Lesson;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;

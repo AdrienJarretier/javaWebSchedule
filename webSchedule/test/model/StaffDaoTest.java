@@ -1,5 +1,6 @@
 package model;
 
+import model.entities.Staff;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import org.junit.After;

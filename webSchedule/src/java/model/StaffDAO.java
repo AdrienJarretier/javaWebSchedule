@@ -1,5 +1,7 @@
 package model;
 
+import model.entities.Staff;
+import model.entities.Class_room;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
