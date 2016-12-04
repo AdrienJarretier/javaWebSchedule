@@ -15,9 +15,8 @@
     <body>
         <h1> Welcome ! </h1>
         Please enter the lesson : <br>
-        
-        <div style="color:red">${errorMessage}</div>
-                <form method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
+  
+                <form method="POST"> 
 			Time start : <input name='time_start'><br>
 			Time end : <input name='time_end'><br>
                         Title : <input name='title'><br>

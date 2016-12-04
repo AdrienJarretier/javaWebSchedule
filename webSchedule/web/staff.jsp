@@ -50,6 +50,7 @@
                             <th>Teacher</th>
                         </c:if>
                         <th>Edit lesson</th>
+                        <th>Remove lesson</th>
                     </tr>
 
                     <c:forEach var="lesson" items="${lessons}">
@@ -63,6 +64,7 @@
                                 <td>${lesson.getTeacher().getLastName()}</td>
                             </c:if>
                            <td><a href="ButtonEditController?id=${lesson.getId()}">Edit</a></td>
+                           <td><a href="RemoveLessonController?id=${lesson.getId()}">Remove</a></td>
                         </tr>
                         
                     </c:forEach>

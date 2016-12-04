@@ -12,7 +12,7 @@ import javax.sql.DataSource;
  *
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
-class Class_roomDAO {
+public class Class_roomDAO {
 
     private final DataSource myDataSource;
 
@@ -68,7 +68,7 @@ class Class_roomDAO {
         }
     }
 
-    private ArrayList<Class_room> getClassRooms() throws SQLException {
+    public ArrayList<Class_room> getClassRooms() throws SQLException {
 
         String sql = "SELECT * FROM " + CLASS_ROOM_TABLE;
 

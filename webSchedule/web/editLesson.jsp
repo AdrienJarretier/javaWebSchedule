@@ -28,7 +28,7 @@
             </select>
 
             <c:if test="${sessionScope.userEntity.getIsAdmin()}">
-                Teacher : <select name = 'teacher' type='' value=${lesson.getTeacher()}>
+                Teacher : <select name = 'teacher' type='text' value=${lesson.getTeacher()}>
                     <c:forEach var="teacherName" items="${teacherNames}">
                         <option value='${teacher.getId()}'> ${teacherNames.getLastName()} ${teacherNames.getFirstName()} </option> 
                     </c:forEach>

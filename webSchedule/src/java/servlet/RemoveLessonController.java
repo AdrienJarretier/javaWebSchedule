@@ -6,29 +6,19 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.DAOException;
-import model.LessonDAO;
-import model.StaffDAO;
-import model.Class_roomDAO;
-import model.entities.Class_room;
-import model.entities.Lesson;
-import model.entities.Staff;
 
 /**
  *
  * @author Laurie
  */
-@WebServlet(name = "ButtonEditController", urlPatterns = {"/ButtonEditController"})
-public class ButtonEditController extends HttpServlet {
+@WebServlet(name = "RemoveLessonController", urlPatterns = {"/RemoveLessonController"})
+public class RemoveLessonController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,26 +30,20 @@ public class ButtonEditController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, DAOException {
-            
-            Staff user = (Staff) request.getSession().getAttribute("userEntity");
-            int lesson_id =  Integer.parseInt(request.getParameter("id"));
-            
-            LessonDAO l = new LessonDAO();
-            Lesson lesson = l.getById(lesson_id);
-            
-            Class_roomDAO c = new Class_roomDAO();
-            ArrayList<Class_room> rooms = c.getClassRooms();
-            
-            if (user.getIsAdmin()) {
-                 StaffDAO s = new StaffDAO();
-                ArrayList<Staff> teacherNames = s.getTeachers();
-                request.setAttribute("teacherNames", teacherNames);
-            }
-            
-            request.setAttribute("lesson", lesson);
-            request.setAttribute("rooms", rooms);
-            request.getRequestDispatcher("editLesson.jsp").forward(request, response);
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet RemoveLessonController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet RemoveLessonController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,13 +58,7 @@ public class ButtonEditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ButtonEditController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DAOException ex) {
-            Logger.getLogger(ButtonEditController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -94,13 +72,7 @@ public class ButtonEditController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ButtonEditController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DAOException ex) {
-            Logger.getLogger(ButtonEditController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
