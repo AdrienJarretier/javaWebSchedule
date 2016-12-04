@@ -38,6 +38,8 @@ public class EditLessonController extends HttpServlet {
         int room =  Integer.parseInt(request.getParameter("room"));
         int teacher =  Integer.parseInt(request.getParameter("teacher"));
         
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -41,7 +41,11 @@
             <c:otherwise> 
 
                 <table border="1">
-                    <tr><th>Id</th><th>Time_start</th><th>Time_end</th><th>Title</th><th>Class_room</th>
+                    <tr>
+                        <th>Time_start</th>
+                        <th>Time_end</th>
+                        <th>Title</th>
+                        <th>Class_room</th>
                         <c:if test="${sessionScope.userEntity.getIsAdmin()}" > 
                             <th>Teacher</th>
                         </c:if>
@@ -49,9 +53,13 @@
 
                     <c:forEach var="lesson" items="${lessons}">
 
-                        <tr><td>${lesson.getId()}</td><td>${lesson.getTimeStart()}</td><td>${lesson.getTimeEnd()}</td><td>${lesson.getTitle()}</td><td>${lesson.getClass_room_id()}</td>
+                        <tr>
+                            <td>${lesson.getTimeStart()}</td>
+                            <td>${lesson.getTimeEnd()}</td>
+                            <td>${lesson.getTitle()}</td>
+                            <td>${lesson.getClass_room().getBuilding()} ${lesson.getClass_room().getRoom_number()}</td>
                             <c:if test="${sessionScope.userEntity.getIsAdmin()}" > 
-                                <td>${lesson.getTeacher_id()}</td>
+                                <td>${lesson.getTeacher().getLastName()}</td>
                             </c:if>
                         </tr>
                         
