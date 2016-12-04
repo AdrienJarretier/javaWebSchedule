@@ -21,6 +21,7 @@
         <title>Teacher's lessons</title>
     </head>
     <body>
+        <c:import url="nav.jsp" />
         <h1>Welcome Mr. ${sessionScope.userEntity.getLastName()}</h1>
         Here are your lessons : 
         <table border="1">

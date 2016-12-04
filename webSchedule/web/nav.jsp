@@ -4,26 +4,37 @@
     Author     : Jarretier Adrien "jarretier.adrien@gmail.com"
 --%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <nav>
     <ul>
         <li>
-            <a href="index.jsp"> Home </a>
+            <a href="index.jsp">Home</a>
         </li>
         <li>
-            <a href="login.jsp"> Connect </a>
-        </li>
-        <li>
-            <a href="Add lesson"> Add a lesson </a>
-        </li>
-        <li>
-            <a href="Remove lesson"> Remove a lesson </a>
-        </li>
-        <li>
-            <a href="Edit lesson"> Edit a lesson </a>
-        </li>
-        <li>
-            <a href="Show schedule"> Show a schedule </a>
+            <a href="Show schedule">Schedule</a>
         </li>
 
+        <c:choose>
+            <c:when test="${empty sessionScope.userEntity}" >
+                <li>
+                    <a href="login.jsp">Login</a>
+                </li>
+            </c:when>
+
+            <c:otherwise>
+                <li>
+                    <a href="Add lesson"> Page to add a lesson </a>
+                </li>
+                <li>
+                    <a href="Remove lesson"> Page to remove a lesson </a>
+                </li>
+                <li>
+                    <a href="Edit lesson"> Page to edit a lesson </a>
+                </li>
+            </c:otherwise>
+        </c:choose>
+
     </ul>
+
 </nav>
