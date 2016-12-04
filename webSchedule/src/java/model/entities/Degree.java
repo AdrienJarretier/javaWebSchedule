@@ -15,6 +15,12 @@ public class Degree {
     private String name;
     private int student_count;
 
+    public Degree(int id, String name, int student_count) {
+        this.id = id;
+        this.name = name;
+        this.student_count = student_count;
+    }
+
     public int getId() {
         return id;
     }
