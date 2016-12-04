@@ -15,3 +15,5 @@ when adding or update a lesson, ajax to update the sum of students in selected d
 lesson_participants : pair unique
 
 in forms for lesson, input for times set to date time instead of text
+
+when listing lessons, display the degrees attending
