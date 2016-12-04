@@ -62,7 +62,7 @@
                             <c:if test="${sessionScope.userEntity.getIsAdmin()}" > 
                                 <td>${lesson.getTeacher().getLastName()}</td>
                             </c:if>
-                            <a href="BottomEditController">Edit</a>
+                           <td><a href="BottomEditController">Edit</a></td>
                         </tr>
                         
                     </c:forEach>
