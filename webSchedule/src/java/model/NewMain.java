@@ -28,7 +28,22 @@ public class NewMain {
 //INNER JOIN DEGREE on LESSON_PARTICIPANTS.DEGREE_ID = DEGREE.ID
 //WHERE lesson.ID = 6;
 
+
+
+//SELECT * from LESSON_PARTICIPANTS
+//                   INNER JOIN DEGREE
+//                    ON LESSON_PARTICIPANTS.degree_id = DEGREE.id
+//                    WHERE lesson_id = 5;
+
         
+//SELECT * FROM LESSON
+//                 INNER JOIN class_room ON class_room.id=LESSON.CLASS_ROOM_ID
+//                INNER JOIN staff ON staff.id=LESSON.TEACHER_ID 
+//               WHERE teacher_id = 1
+//                 ORDER BY time_start
+
+
+
         LessonDAO lDAO = new LessonDAO();
         
 //        ArrayList<Degree> participants = new ArrayList<>();

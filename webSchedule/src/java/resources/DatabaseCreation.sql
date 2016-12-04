@@ -24,7 +24,7 @@ CREATE TABLE class_room (
 CREATE TABLE degree(
 	id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	name VARCHAR(30) UNIQUE,
-	student_counts INT
+	students_count INT
 );
 
 
