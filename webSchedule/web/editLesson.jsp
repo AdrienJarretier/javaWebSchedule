@@ -17,10 +17,10 @@
         Edit lesson : <br>
 
         <form method="POST"> 
-            Time start : <input name='time_start' type='text' value='ok'><br>
-            Time end : <input name='time_end' type='text'><br>
-            Title : <input name='title' type='text'><br>
-            Class room : <select name = 'room' type='text'>
+            Time start : <input name='time_start' type='text' value=${lesson.getTimeStart()}><br>
+            Time end : <input name='time_end' type='text' value=${lesson.getTimeEnd()}><br>
+            Title : <input name='title' type='text' value=${lesson.getTitle()}><br>
+            Class room : <select name = 'room' type='text' value=${lesson.getClass_room()}>
                 <c:forEach var="rooms" items="${rooms}">
                     <option value='${rooms.getId()}'> ${rooms.getBuilding()} ${rooms.getRoom_number()} ( ${teacherNames.getCapacity()} places) </option> 
                 </c:forEach>
@@ -28,7 +28,7 @@
             </select>
 
             <c:if test="${sessionScope.userEntity.getIsAdmin()}">
-                Teacher : <select name = 'teacher' type=''>
+                Teacher : <select name = 'teacher' type='' value=${lesson.getTeacher()}>
                     <c:forEach var="teacherName" items="${teacherNames}">
                         <option value='${teacher.getId()}'> ${teacherNames.getLastName()} ${teacherNames.getFirstName()} </option> 
                     </c:forEach>

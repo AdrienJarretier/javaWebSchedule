@@ -6,23 +6,24 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Timestamp;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.entities.Class_room;
+import model.DAOException;
+import model.LessonDAO;
 import model.entities.Lesson;
-import model.entities.Staff;
 
 /**
  *
  * @author Laurie
  */
-@WebServlet(name = "BottomEditController", urlPatterns = {"/BottomEditController"})
-public class BottomEditController extends HttpServlet {
+@WebServlet(name = "ButtonEditController", urlPatterns = {"/ButtonEditController"})
+public class ButtonEditController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +35,13 @@ public class BottomEditController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, DAOException {
         
-        String l = request.getParameter("lesson");
-        
+            int lesson_id =  Integer.parseInt(request.getParameter("id"));
+            LessonDAO l = new LessonDAO();
+            Lesson lesson = l.getById(lesson_id);
+            request.getSession().setAttribute("lesson", lesson);
+            String jspView = "editLesson.jsp";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,7 +56,13 @@ public class BottomEditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ButtonEditController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOException ex) {
+            Logger.getLogger(ButtonEditController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -66,7 +76,13 @@ public class BottomEditController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ButtonEditController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOException ex) {
+            Logger.getLogger(ButtonEditController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
