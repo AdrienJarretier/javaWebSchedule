@@ -17,8 +17,8 @@
         <h1> Are you sure you want to delete this lesson ? </h1>
 
         <form>
-            <input type='submit' name='action' value='remove'>
-            <input type='submit' name='action' value='cancel'>
+            <input type='submit' name='action' formmethod = 'RemovedLessonController' value='remove'>
+            <input type='submit' name='action' formmethod ='staff.jsp' value='cancel'>
         </form>
 
     </body>
