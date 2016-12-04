@@ -197,7 +197,7 @@ public class StaffDAO {
         }
     }
     
-    private ArrayList<Staff> getTeachers() throws SQLException {
+    public ArrayList<Staff> getTeachers() throws SQLException {
         
         String sql = "SELECT * FROM " + STAFF_TABLE + " WHERE is_admin=false";
         
