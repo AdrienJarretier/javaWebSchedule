@@ -39,20 +39,19 @@ public class StaffController extends HttpServlet {
             throws ServletException, IOException, SQLException {
 
         Staff user = (Staff) request.getSession().getAttribute("userEntity");
-        String jspView;
         LessonDAO l = new LessonDAO();
 
         if (user.getIsAdmin()) {
             ArrayList<Lesson> lessons = l.getSchedule();
             request.getSession().setAttribute("lessons", lessons);
-            jspView = "staff.jsp";
+            
         } else {
             ArrayList<Lesson> lessons = l.getSchedule(user);
             request.getSession().setAttribute("lessons", lessons);
-            jspView = "teacher.jsp";
+            
         }
 
-        request.getRequestDispatcher(jspView).forward(request, response);
+        request.getRequestDispatcher("staff.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

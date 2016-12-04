@@ -13,12 +13,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>All lessons</title>
+        <title>Lessons</title>
     </head>
     <body>
         <c:import url="nav.jsp" />
+        
+        
         <h1>Welcome Mr. ${sessionScope.userEntity.getLastName()}</h1>
-        Here are all lessons : 
+        
+        <c:choose>
+            <c:when test="${sessionScope.userEntity.getIsAdmin()}" >
+                Here are all lessons : 
+            </c:when>
+
+            <c:otherwise>
+               Here are your lessons : 
+            </c:otherwise>
+        </c:choose>
+        
 
         <c:choose>
 
@@ -29,11 +41,19 @@
             <c:otherwise> 
 
                 <table border="1">
-                    <tr><th>Id</th><th>Time_start</th><th>Time_end</th><th>Title</th><th>Class_room</th><th>Teacher</th></tr>
+                    <tr><th>Id</th><th>Time_start</th><th>Time_end</th><th>Title</th><th>Class_room</th>
+                        <c:if test="${sessionScope.userEntity.getIsAdmin()}" > 
+                            <th>Teacher</th>
+                        </c:if>
+                    </tr>
 
                     <c:forEach var="lesson" items="${lessons}">
 
-                        <tr><td>${lesson.getId()}</td><td>${lesson.getTimeStart()}</td><td>${lesson.getTimeEnd()}</td><td>${lesson.getTitle()}</td><td>${lesson.getClass_room_id()}</td><td>${lesson.getTeacher_id()}</td></tr>
+                        <tr><td>${lesson.getId()}</td><td>${lesson.getTimeStart()}</td><td>${lesson.getTimeEnd()}</td><td>${lesson.getTitle()}</td><td>${lesson.getClass_room_id()}</td>
+                            <c:if test="${sessionScope.userEntity.getIsAdmin()}" > 
+                                <td>${lesson.getTeacher_id()}</td>
+                            </c:if>
+                        </tr>
                         
                     </c:forEach>
 

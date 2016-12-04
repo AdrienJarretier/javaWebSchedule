@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,33 +14,12 @@
         <title>Remove lesson</title>
     </head>
     <body>
-        <h1> Welcome ! </h1>
-        Remove lesson with Id : <br>
-        
-         <div style="color:red">${errorMessage}</div>
-                <form method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
-			Lesson id : <input name='lesson_id'><br>
-			<input type='submit' name='action' value='Remove'>
-		</form>
-         <br>       
-        Remove lesson with Time start and class room : <br>
-        
-        <div style="color:red">${errorMessage}</div>
-                <form method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
-			Time start : <input name='time_start'><br>
-                        Class room : <input name='class_room'><br>
-			<input type='submit' name='action' value='Remove'>
-		</form>
-        <br>
-        Remove lesson with Time start and teacher : <br>
-        
-        <div style="color:red">${errorMessage}</div>
-                <form method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
-			Time start : <input name='time_start'><br>
-                        Teacher : <input name='teacher'><br>
-			<input type='submit' name='action' value='Remove'>
-		</form>
-        
-        
+        <h1> Are you sure you want to delete this lesson ? </h1>
+
+        <form>
+            <input type='submit' name='action' value='remove'>
+            <input type='submit' name='action' value='cancel'>
+        </form>
+
     </body>
 </html>

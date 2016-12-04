@@ -24,14 +24,9 @@
 
             <c:otherwise>
                 <li>
-                    <a href="Add lesson"> Page to add a lesson </a>
+                    <a href="staff.jsp"> View lessons </a>
                 </li>
-                <li>
-                    <a href="Remove lesson"> Page to remove a lesson </a>
-                </li>
-                <li>
-                    <a href="Edit lesson"> Page to edit a lesson </a>
-                </li>
+                
             </c:otherwise>
         </c:choose>
 
