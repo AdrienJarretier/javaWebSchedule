@@ -21,7 +21,7 @@
         <title>Teacher's lessons</title>
     </head>
     <body>
-        <h1>Welcome Mr. ${teacher.name}</h1>
+        <h1>Welcome Mr. ${sessionScope.userEntity.getLastName()}</h1>
         Here are your lessons : 
         <table border="1">
             <tr><th>Id</th><th>Time_start</th><th>Time_end</th><th>Title</th><th>Class_room</th></tr>
