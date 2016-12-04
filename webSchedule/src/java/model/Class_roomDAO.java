@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.sql.DataSource;
 
 /**
@@ -65,6 +66,34 @@ class Class_roomDAO {
             throw new DAOException("this id does not match any class room");
 
         }
+    }
+
+    private ArrayList<Class_room> getClassRooms() throws SQLException {
+
+        String sql = "SELECT * FROM " + CLASS_ROOM_TABLE;
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+
+        ArrayList<Class_room> class_rooms = new ArrayList<>();
+
+        while (rs.next()) {
+
+            int id = rs.getInt("id");
+            String building = rs.getString("building");
+            int room_nb = rs.getInt("room_nb");
+            int capacity = rs.getInt("capacity");
+
+            class_rooms.add(new Class_room(id, building, room_nb, capacity));
+
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return class_rooms;
     }
 
 }
