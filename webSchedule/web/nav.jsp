@@ -7,19 +7,22 @@
 <nav>
     <ul>
         <li>
-            <a href="login.jsp"> Page to connect </a>
+            <a href="index.jsp"> Home </a>
         </li>
         <li>
-            <a href="Add lesson"> Page to add a lesson </a>
+            <a href="login.jsp"> Connect </a>
         </li>
         <li>
-            <a href="Remove lesson"> Page to remove a lesson </a>
+            <a href="Add lesson"> Add a lesson </a>
         </li>
         <li>
-            <a href="Edit lesson"> Page to edit a lesson </a>
+            <a href="Remove lesson"> Remove a lesson </a>
         </li>
         <li>
-            <a href="Show schedule">Page to show a schedule </a>
+            <a href="Edit lesson"> Edit a lesson </a>
+        </li>
+        <li>
+            <a href="Show schedule"> Show a schedule </a>
         </li>
 
     </ul>

@@ -33,6 +33,6 @@
             <input type='submit' name='action' value='Logout'>
             <input type='submit' name='action' value='Add lesson'>
         </form>
-	
+	<c:import url="nav.jsp" />
     </body>
 </html>

@@ -23,7 +23,7 @@
 			<input type='submit' name='action' value='login'>
 		</form>
 		
-        
+        <c:import url="nav.jsp" />
         
         
     </body>
