@@ -277,7 +277,7 @@ public class LessonDAO {
             Connection connection = myDataSource.getConnection();
             PreparedStatement partsStmt = connection.prepareStatement(sql);
 
-            int lesson_id = rs.getInt("lesson.id");
+            int lesson_id = rs.getInt(1);
 
             partsStmt.setInt(1, lesson_id);
             ResultSet partsRS = partsStmt.executeQuery();

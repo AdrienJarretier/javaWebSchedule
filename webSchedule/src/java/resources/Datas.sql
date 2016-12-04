@@ -7,7 +7,7 @@ INSERT INTO class_room (building, room_nb, capacity)  VALUES
 ('Multimedia', 206, 28);
 
 
-INSERT INTO degree (name, student_counts) VALUES 
+INSERT INTO degree (name, students_count) VALUES 
 ('L2 informatique', 12),
 ('L1 Biologie', 35),
 ('L3 Mathématiques', 128),
