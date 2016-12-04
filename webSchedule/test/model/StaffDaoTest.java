@@ -54,7 +54,7 @@ public class StaffDaoTest {
                 fail("hash algo error : " + ex.getMessage());
             } catch (SQLException ex) {
                 fail("SQLException : " + ex.getMessage());
-            } catch (Exception ex) {
+            } catch (DAOException ex) {
                 fail("found incorrect credentials : " + ex.getMessage());
             }
 
@@ -68,7 +68,7 @@ public class StaffDaoTest {
                 fail("hash algo error : " + ex.getMessage());
             } catch (SQLException ex) {
                 fail("SQLException : " + ex.getMessage());
-            } catch (Exception ex) {
+            } catch (DAOException ex) {
             }
 
             login = "hoch.genvieve@univ.fr";
@@ -81,7 +81,7 @@ public class StaffDaoTest {
                 fail("hash algo error : " + ex.getMessage());
             } catch (SQLException ex) {
                 fail("SQLException : " + ex.getMessage());
-            } catch (Exception ex) {
+            } catch (DAOException ex) {
             }
         } catch (SQLException ex) {
             fail("constructor error : " + ex.getMessage());
@@ -127,7 +127,7 @@ public class StaffDaoTest {
      * Test of getById method, of class StaffDAO.
      */
     @Test
-    public void testGetById() throws Exception {
+    public void testGetById() {
         System.out.println("getById");
         int staff_id = 3;
 
@@ -145,6 +145,8 @@ public class StaffDaoTest {
 
         } catch (SQLException ex) {
             fail("constructor error : " + ex.getMessage());
+        } catch (DAOException ex) {
+            fail("DAOException : " + ex.getMessage());
         }
     }
 

@@ -6,12 +6,14 @@
 package servlet;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.DAOException;
 import model.entities.Staff;
 import model.StaffDAO;
 
@@ -33,7 +35,7 @@ public class LoginController extends HttpServlet {
      * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, Exception {
+            throws ServletException, IOException, SQLException, NoSuchAlgorithmException {
         
         // On récupère les paramètres de la requête
         String p1 = request.getParameter("login");
@@ -55,7 +57,7 @@ public class LoginController extends HttpServlet {
             }
             
             
-        }catch (RuntimeException e){
+        }catch (DAOException e){
             
             jspView = "login.jsp";
             request.setAttribute("errorMessage", "incorrect email or password");

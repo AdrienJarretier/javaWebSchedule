@@ -79,7 +79,7 @@ public class StaffDAO {
             rs.close();
             stmt.close();
             connection.close();
-            throw new RuntimeException("email does not match");
+            throw new DAOException("email does not match");
         }
 
         if (Arrays.equals(passwordHashed, passwordStored)) {

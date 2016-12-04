@@ -98,7 +98,7 @@ public class LessonDAOTest {
 
             fail("SQLException : " + ex.getMessage());
 
-        } catch (Exception ex) {
+        } catch (DAOException ex) {
 
             fail("no class room in the db matches with that id ");
         }
@@ -146,7 +146,7 @@ public class LessonDAOTest {
 
             fail("SQLException : " + ex.getMessage());
 
-        } catch (Exception ex) {
+        } catch (DAOException ex) {
 
             fail("no staff member in the db matches with that id ");
         }
@@ -184,7 +184,7 @@ public class LessonDAOTest {
     }
 
     @Test
-    public void testGetById() throws Exception {
+    public void testGetById() {
         System.out.println("getById");
         int lesson_id = 3;
 
