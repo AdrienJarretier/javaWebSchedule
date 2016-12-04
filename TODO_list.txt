@@ -8,3 +8,6 @@ better DB with unicity constraints and not null contraints where necessary
 
 when adding a lesson, check if end is greater than start
 check if room capacity is greter than degree student count (sum of all degrees participing)
+
+
+when adding or update a lesson, ajax to update the sum of students in selected degrees participing
