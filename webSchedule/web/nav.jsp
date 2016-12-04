@@ -7,7 +7,7 @@
 <nav>
     <ul>
         <li>
-            <a href="login.jsp"> Page to connect </a>
+            <a href="index.jsp">Home</a>
         </li>
         <li>
             <a href="Add lesson"> Page to add a lesson </a>
@@ -19,8 +19,10 @@
             <a href="Edit lesson"> Page to edit a lesson </a>
         </li>
         <li>
-            <a href="Show schedule">Page to show a schedule </a>
+            <a href="Show schedule">Schedule</a>
         </li>
-
+        <li>
+            <a href="login.jsp">Login</a>
+        </li>
     </ul>
 </nav>

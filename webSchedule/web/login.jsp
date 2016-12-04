@@ -13,6 +13,7 @@
         <title>Please login</title>
     </head>
     <body>
+        <c:import url="nav.jsp" />
         <h1> Welcome ! </h1>
         Please enter your email and password <br>
         
