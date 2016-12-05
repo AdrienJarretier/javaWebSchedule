@@ -12,7 +12,10 @@
             <a href="index.jsp">Home</a>
         </li>
         <li>
-            <a href="Show schedule">Schedule</a>
+            <a href="SelectSchedule?type=teachers">Teachers Schedules</a>
+        </li>
+        <li>
+            <a href="SelectSchedule?type=degrees">Degrees Schedules</a>
         </li>
 
         <c:choose>
@@ -26,7 +29,7 @@
                 <li>
                     <a href="staff.jsp"> View lessons </a>
                 </li>
-                
+
             </c:otherwise>
         </c:choose>
 
