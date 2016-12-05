@@ -23,11 +23,11 @@
         
         <c:choose>
             <c:when test="${sessionScope.userEntity.getIsAdmin()}" >
-                Here are all lessons : 
+                Here are all lessons : <br>
             </c:when>
 
             <c:otherwise>
-               Here are your lessons : 
+                Here are your lessons : <br>
             </c:otherwise>
         </c:choose>
         
@@ -35,7 +35,12 @@
         <c:choose>
 
             <c:when test="${empty lessons}">
-                No lessons to display			
+                No lessons to display
+                
+                <br>
+                <td><a href="ButtonAddController">Add Lesson</a></td>
+                <br>
+                
             </c:when>
                 
             <c:otherwise> 

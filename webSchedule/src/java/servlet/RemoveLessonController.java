@@ -38,25 +38,18 @@ public class RemoveLessonController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, DAOException {
-        
+
         Staff user = (Staff) request.getSession().getAttribute("userEntity");
-        
-        int lesson_id =  Integer.parseInt(request.getParameter("id"));
+
+        int lesson_id = Integer.parseInt(request.getParameter("id"));
         LessonDAO l = new LessonDAO();
-        
-        if (user.getIsAdmin()) {
+        Lesson lesson = l.getById(lesson_id);
+
+        if (user.getIsAdmin() || lesson.getTeacher().getId() == user.getId()) {
             l.remove(lesson_id);
-        }
-        else{
-            Lesson lesson = l.getById(lesson_id);
-        
-            if(lesson.getTeacher()==user){
-                l.remove(lesson_id);
-            }
-            else{
-                request.setAttribute("errorMessage", "impossible de supprimer un cours dont vous n'êtes pas l'auteur");
-            }
-        }
+        }else{
+        request.setAttribute("errorMessage", "impossible de supprimer un cours dont vous n'êtes pas l'auteur ou admin");
+        } 
         
         request.getRequestDispatcher("StaffController").forward(request, response);
     }
@@ -75,10 +68,14 @@ public class RemoveLessonController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (SQLException ex) {
-            Logger.getLogger(RemoveLessonController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RemoveLessonController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (DAOException ex) {
-            Logger.getLogger(RemoveLessonController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RemoveLessonController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -95,10 +92,14 @@ public class RemoveLessonController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (SQLException ex) {
-            Logger.getLogger(RemoveLessonController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RemoveLessonController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (DAOException ex) {
-            Logger.getLogger(RemoveLessonController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RemoveLessonController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
