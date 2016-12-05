@@ -17,54 +17,63 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script type="text/javascript">
 
-        // load the Visualization API and the timeline package
-        google.charts.load('current', {packages: ['timeline']});
+            // load the Visualization API and the timeline package
+            google.charts.load('current', {packages: ['timeline']});
 
-        // set a callback to run when the google vis api is loaded
-        google.charts.setOnLoadCallback(drawChart);
+            // set a callback to run when the google vis api is loaded
+            google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
+            function draw(result) {
 
-            var jsonDATA = $.ajax({
-                data: {
-                    "name": $("select").attr("name"),
-                    "teacherId": $("select option:selected").val()
-                },
-                url: "AjaxScheduleDatasServlet",
-                dataType: "json"
-            }).responseText;
+                console.log("success : ");
+                console.log(result);
 
-            // Create our data table out of JSON data loaded from server.
-            var data = new google.visualization.DataTable(jsonDATA);
+                // Create our data table out of JSON data loaded from server.
+                var data = new google.visualization.DataTable(result);
 
-            // instanciate and draw the chart
-            var container = document.getElementById('timeline');
-            var chart = new google.visualization.Timeline(container);
-            chart.draw(data);
+                // instanciate and draw the chart
+                var container = document.getElementById('timeline');
+                var chart = new google.visualization.Timeline(container);
 
-//                var container = document.getElementById('timeline');
-//                var chart = new google.visualization.Timeline(container);
-//                var dataTable = new google.visualization.DataTable();
-//
-//                dataTable.addColumn({type: 'string', id: 'President'});
-//                dataTable.addColumn({type: 'date', id: 'Start'});
-//                dataTable.addColumn({type: 'date', id: 'End'});
-//                dataTable.addRows([
-//                    ['Washington', new Date(1789, 3, 30), new Date(1797, 2, 4)],
-//                    ['Adams', new Date(1797, 2, 4), new Date(1801, 2, 4)],
-//                    ['Jefferson', new Date(1801, 2, 4), new Date(1809, 2, 4)]]);
-//
-//                chart.draw(dataTable);
-        }
+                var dataTable = new google.visualization.DataTable();
 
-        $(document).ready(// executed when page is done loading
+                dataTable.addColumn({type: 'string', id: 'buidling'});
+                dataTable.addColumn({type: 'date', id: 'start'});
+                dataTable.addColumn({type: 'date', id: 'end'});
+                dataTable.addRow(['test 150', new Date('Dec 4, 2016 8:45:00 AM'), new Date('Dec 4, 2016 12:00:00 PM')]);
+                dataTable.addRow(['test 150', new Date('Dec 4, 2016 8:45:00 AM'), new Date('Dec 4, 2016 12:00:00 PM')]);
 
-            function () {
-
-                $("#timelineSelect").change(drawChart);
+                chart.draw(dataTable);
             }
 
-        );
+            function showError(xhr, status, message) {
+
+                console.log("error");
+
+            }
+
+            function drawChart() {
+
+                $.ajax({
+                    data: {
+                        "name": $("select").attr("name"),
+                        "teacherId": $("select option:selected").val()
+                    },
+                    url: "AjaxScheduleDatasServlet",
+                    dataType: "json",
+                    success: draw,
+                    error: showError
+                });
+            }
+
+            $(document).ready(// executed when page is done loading
+
+                    function () {
+
+                        $("#timelineSelect").change(drawChart);
+                    }
+
+            );
 
         </script>
     </head>

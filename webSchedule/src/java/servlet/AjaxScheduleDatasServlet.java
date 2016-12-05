@@ -5,7 +5,9 @@
  */
 package servlet;
 
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -40,40 +42,39 @@ public class AjaxScheduleDatasServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String name = request.getParameter("name");
-        int id = Integer.parseInt(request.getParameter("teacherId"));
+        response.setContentType("application/json;charset=UTF-8");
+        try (PrintWriter pwout = response.getWriter()) {
+            String name = request.getParameter("name");
+            int id = Integer.parseInt(request.getParameter("teacherId"));
 
-        try {
-            LessonDAO dao = new LessonDAO();
+            try {
+                LessonDAO dao = new LessonDAO();
 
-            if (name.equals("teacher")) {
+                Gson gson = new Gson();
+                String gsonData = "";
 
-                Staff teacher = (new StaffDAO()).getById(id);
+                if (name.equals("teacher")) {
 
-                ArrayList<Lesson> schedule = dao.getSchedule(teacher);
+                    Staff teacher = (new StaffDAO()).getById(id);
 
-            }
+                    ArrayList<Lesson> schedule = dao.getSchedule(teacher);
+
+                    gsonData = gson.toJson(schedule);
+                }
 //            else if (name.equals("degree")) {
 //
 //                Degree degree = (new DegreeDAO()).getById(id);
 //            }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(AjaxScheduleDatasServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DAOException ex) {
-            Logger.getLogger(AjaxScheduleDatasServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                System.out.println(gsonData);
+                pwout.println(gsonData);
 
-//        response.setContentType("application/json;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//            
-////            LessonDAO dao = new LessonDAO();
-//            
-////            dao.getSchedule(teacher)
-//            
-////            out.println();
-//            
-//        }
+            } catch (SQLException ex) {
+                Logger.getLogger(AjaxScheduleDatasServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DAOException ex) {
+                Logger.getLogger(AjaxScheduleDatasServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
