@@ -33,7 +33,7 @@ public class Logout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        request.logout();
+        request.getSession().invalidate();
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
