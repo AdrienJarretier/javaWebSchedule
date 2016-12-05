@@ -11,6 +11,29 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>select a schedule</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {packages: ['timeline']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var container = document.getElementById('timeline');
+                var chart = new google.visualization.Timeline(container);
+                var dataTable = new google.visualization.DataTable();
+
+                dataTable.addColumn({type: 'string', id: 'President'});
+                dataTable.addColumn({type: 'date', id: 'Start'});
+                dataTable.addColumn({type: 'date', id: 'End'});
+                dataTable.addRows([
+                    ['Washington', new Date(1789, 3, 30), new Date(1797, 2, 4)],
+                    ['Adams', new Date(1797, 2, 4), new Date(1801, 2, 4)],
+                    ['Jefferson', new Date(1801, 2, 4), new Date(1809, 2, 4)]]);
+
+                chart.draw(dataTable);
+            }
+
+        </script>
     </head>
     <body>
         <c:import url="nav.jsp" />
@@ -59,8 +82,11 @@
             </c:choose>
             <br>
             <br>
-            <input type="submit" value="display">
+            <!--<input type="submit" value="display">-->
 
         </form>
+        
+        <div id="timeline" style="height: 180px;"></div>
+
     </body>
 </html>
