@@ -17,27 +17,31 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script type="text/javascript">
 
-            // load the Visualization API and the timeline package
-            google.charts.load('current', {packages: ['timeline']});
+        // load the Visualization API and the timeline package
+        google.charts.load('current', {packages: ['timeline']});
 
-            // set a callback to run when the google vis api is loaded
-            google.charts.setOnLoadCallback(drawChart);
+        // set a callback to run when the google vis api is loaded
+        google.charts.setOnLoadCallback(drawChart);
 
-            function drawChart() {
-                var jsonDATA = $.ajax({
-                    data: {"teacherId":$( "select option:selected" ).val()},
-                    url: "AjaxScheduleDatasServlet",
-                    dataType: "json"
-                }).responseText;
-                
-                // Create our data table out of JSON data loaded from server.
-                var data = new google.visualization.DataTable(jsonDATA);
-                
-                // instanciate and draw the chart
-                var container = document.getElementById('timeline');
-                var chart = new google.visualization.Timeline(container);
-                chart.draw(data);
-                
+        function drawChart() {
+
+            var jsonDATA = $.ajax({
+                data: {
+                    "name": $("select").attr("name"),
+                    "teacherId": $("select option:selected").val()
+                },
+                url: "AjaxScheduleDatasServlet",
+                dataType: "json"
+            }).responseText;
+
+            // Create our data table out of JSON data loaded from server.
+            var data = new google.visualization.DataTable(jsonDATA);
+
+            // instanciate and draw the chart
+            var container = document.getElementById('timeline');
+            var chart = new google.visualization.Timeline(container);
+            chart.draw(data);
+
 //                var container = document.getElementById('timeline');
 //                var chart = new google.visualization.Timeline(container);
 //                var dataTable = new google.visualization.DataTable();
@@ -51,16 +55,16 @@
 //                    ['Jefferson', new Date(1801, 2, 4), new Date(1809, 2, 4)]]);
 //
 //                chart.draw(dataTable);
+        }
+
+        $(document).ready(// executed when page is done loading
+
+            function () {
+
+                $("#timelineSelect").change(drawChart);
             }
 
-            $(document).ready(// executed when page is done loading
-
-                    function () {
-
-                        $("#timelineSelect").change(drawChart);
-                    }
-
-            );
+        );
 
         </script>
     </head>
@@ -89,7 +93,7 @@
                 <c:when test="${!empty teachers}" >      
                     <select id="timelineSelect" name="teacher">
 
-                        <option disabled selected> Teachers </option>
+                        <!--<option disabled selected> Teachers </option>-->
 
                         <c:forEach var="teacher" items="${teachers}">
                             <option value='${teacher.getId()}'> ${teacher.getLastName()} ${teacher.getFirstName()} </option> 
@@ -102,7 +106,7 @@
                 <c:when test="${!empty degrees}" >
                     <select id="timelineSelect" name="degree">
 
-                        <option disabled selected> Degrees </option>
+                        <!--<option disabled selected> Degrees </option>-->
 
                         <c:forEach var="degree" items="${degrees}">
                             <option value='${degree.getId()}'> ${degree.getName()} </option> 

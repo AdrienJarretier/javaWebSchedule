@@ -33,6 +33,7 @@ public class AjaxScheduleDatasServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        System.out.println( request.getParameter("name") );
         System.out.println( request.getParameter("teacherId") );
         
 //        response.setContentType("application/json;charset=UTF-8");
