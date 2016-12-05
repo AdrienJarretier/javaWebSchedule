@@ -18,6 +18,18 @@ INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALU
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L2 PC'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY));
 
+INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
+('2016-12-05 08:45:00', '2016-12-05 12:00:00', 'Chimie moléculaire', (SELECT id from class_room WHERE building = 'Borel' AND room_nb = 12), (SELECT id from staff WHERE email = 'bernard.claude@univ.fr'));
+
+INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
+((SELECT id FROM degree WHERE name = 'L2 PC'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY));
+
+INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
+('2016-12-11 08:45:00', '2016-12-11 12:00:00', 'Chimie moléculaire', (SELECT id from class_room WHERE building = 'Borel' AND room_nb = 12), (SELECT id from staff WHERE email = 'bernard.claude@univ.fr'));
+
+INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
+((SELECT id FROM degree WHERE name = 'L2 PC'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY));
+
 
 
 

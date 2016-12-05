@@ -26,7 +26,7 @@
         function draw(result) {
             
             console.log("success : ");
-            console.log(result[0]);
+            console.log(result);
 
             // Create our data table out of JSON data loaded from server.
             var data = new google.visualization.DataTable(result);
