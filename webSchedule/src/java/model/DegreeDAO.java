@@ -30,7 +30,8 @@ public class DegreeDAO {
 
     public ArrayList<Degree> getDegrees() throws SQLException {
 
-        String sql = "SELECT * FROM " + DEGREE_TABLE;
+        String sql = "SELECT * FROM " + DEGREE_TABLE
+                + " ORDER BY name";
 
         Connection connection = myDataSource.getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
