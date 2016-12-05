@@ -23,19 +23,13 @@
         // set a callback to run when the google vis api is loaded
         google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
-
-            var jsonDATA = $.ajax({
-                data: {
-                    "name": $("select").attr("name"),
-                    "teacherId": $("select option:selected").val()
-                },
-                url: "AjaxScheduleDatasServlet",
-                dataType: "json"
-            }).responseText;
+        function draw(result) {
+            
+            console.log("success : ");
+            console.log(result[0]);
 
             // Create our data table out of JSON data loaded from server.
-            var data = new google.visualization.DataTable(jsonDATA);
+            var data = new google.visualization.DataTable(result);
 
             // instanciate and draw the chart
             var container = document.getElementById('timeline');
@@ -55,6 +49,26 @@
 //                    ['Jefferson', new Date(1801, 2, 4), new Date(1809, 2, 4)]]);
 //
 //                chart.draw(dataTable);
+        }
+        
+        function showError(xhr, status, message) {
+            
+            console.log("error");
+            
+        }
+
+        function drawChart() {
+
+            $.ajax({
+                data: {
+                    "name": $("select").attr("name"),
+                    "teacherId": $("select option:selected").val()
+                },
+                url: "AjaxScheduleDatasServlet",
+                dataType: "json",
+                success: draw,
+                error: showError
+            });
         }
 
         $(document).ready(// executed when page is done loading
