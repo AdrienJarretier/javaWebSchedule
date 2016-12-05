@@ -17,3 +17,6 @@ lesson_participants : pair unique
 in forms for lesson, input for times set to date time instead of text
 
 when listing lessons, display the degrees attending
+
+<fmt:formatDate value="${now}" type="date"
+    dateStyle="full"/>
