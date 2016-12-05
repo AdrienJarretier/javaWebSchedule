@@ -28,20 +28,25 @@
                 console.log("success : ");
                 console.log(result);
 
-                // Create our data table out of JSON data loaded from server.
-                var data = new google.visualization.DataTable(result);
-
                 // instanciate and draw the chart
                 var container = document.getElementById('timeline');
                 var chart = new google.visualization.Timeline(container);
 
                 var dataTable = new google.visualization.DataTable();
 
-                dataTable.addColumn({type: 'string', id: 'buidling'});
+                dataTable.addColumn({type: 'string', id: 'class_room'});
+                dataTable.addColumn({type: 'string', id: 'title'});
                 dataTable.addColumn({type: 'date', id: 'start'});
                 dataTable.addColumn({type: 'date', id: 'end'});
-                dataTable.addRow(['test 150', new Date('Dec 4, 2016 8:45:00 AM'), new Date('Dec 4, 2016 12:00:00 PM')]);
-                dataTable.addRow(['test 150', new Date('Dec 4, 2016 8:45:00 AM'), new Date('Dec 4, 2016 12:00:00 PM')]);
+
+                for (var i = 0; i < result.length; ++i) {
+
+                    var lesson = result[i];
+                    console.log("lesson :");
+                    console.log(lesson);
+                    var cr = lesson.class_room;
+                    dataTable.addRow([cr.building + ' ' + cr.room_number, lesson.title, new Date(lesson.timeStart), new Date(lesson.timeEnd)]);
+                }
 
                 chart.draw(dataTable);
             }
@@ -132,7 +137,7 @@
 
         </form>
 
-        <div id="timeline" style="height: 180px;"></div>
+        <div id="timeline"></div>
 
     </body>
 </html>
