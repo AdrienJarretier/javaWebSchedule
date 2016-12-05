@@ -16,7 +16,8 @@
         <h1> Welcome ! </h1>
         Edit lesson : <br>
 
-        <form method="POST"> 
+        <form method="POST" action='EditLessonController'> 
+            Id : <input name='id' type='text' value=${lesson.getId()}><br>
             Time start : <input name='time_start' type='text' value=${lesson.getTimeStart()}><br>
             Time end : <input name='time_end' type='text' value=${lesson.getTimeEnd()}><br>
             Title : <input name='title' type='text' value=${lesson.getTitle()}><br>
@@ -35,10 +36,25 @@
 
                 </select>
             </c:if>
+            
+             <br>
+                <fieldset>
+                    <legend>Degree</legend>
+                
+                <c:forEach var="degrees" items="${degrees}">
+                    <input type='checkbox' name = 'degree' value='${degrees.getId()}'> 
+                        ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
+                    </input>
+                </c:forEach>
+                    </fieldset>
+             
+             
             <input type='submit' name='action' value='Edit'>
         </form>
 
-
+        <form action='StaffController'>
+            <input type='submit' value='cancel'>
+        </form>
 
     </body>
 </html>

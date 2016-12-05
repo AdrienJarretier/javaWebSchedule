@@ -6,13 +6,25 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Class_roomDAO;
+import model.DAOException;
+import model.DegreeDAO;
+import model.LessonDAO;
+import model.StaffDAO;
+import model.entities.Class_room;
+import model.entities.Degree;
+import model.entities.Lesson;
+import model.entities.Staff;
 
 /**
  *
@@ -31,16 +43,36 @@ public class EditLessonController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, DAOException {
+        
+        int id =  Integer.parseInt(request.getParameter("id"));
         Timestamp timeStart  = Timestamp.valueOf(request.getParameter("time_start"));
         Timestamp timeEnd  = Timestamp.valueOf(request.getParameter("time_end"));
         String title = request.getParameter("title");
         int room =  Integer.parseInt(request.getParameter("room"));
         int teacher =  Integer.parseInt(request.getParameter("teacher"));
         
-        String jspView = "staff.jsp";
+        String[] degree = request.getParameterValues("degree");
+
+        ArrayList<Degree> participants = new ArrayList<Degree>();
+        for (int i = 0; i < degree.length; ++i) {
+            DegreeDAO d = new DegreeDAO();
+            int idD = Integer.parseInt(degree[i]);
+            participants.add(d.getById(idD));
+        }
+        
+        Class_roomDAO clD = new Class_roomDAO();
+        Class_room classRoom = clD.getById(room);
+        
+        StaffDAO s = new StaffDAO();
+        Staff teach = s.getById(teacher);
         
         
+        Lesson lesson = new Lesson(id, timeStart, timeEnd, title,classRoom , teach, participants);
+        LessonDAO l = new LessonDAO();
+        l.edit(lesson);
+        
+        request.getRequestDispatcher("StaffController").forward(request, response);
         
     }
 
@@ -56,7 +88,13 @@ public class EditLessonController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditLessonController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOException ex) {
+            Logger.getLogger(EditLessonController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -70,7 +108,13 @@ public class EditLessonController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditLessonController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOException ex) {
+            Logger.getLogger(EditLessonController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

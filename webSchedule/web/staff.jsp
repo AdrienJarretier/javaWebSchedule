@@ -68,13 +68,14 @@
                         </tr>
                         
                     </c:forEach>
-
+                        
                     <!--                        <form method="POST"> 
                                                 <input type='submit' name='action' value='Logout'>
-                                                <input type='submit' name='action' value='Add lesson'>
+                                                
                                             </form>-->
 
                 </table>
+                <td><a href="ButtonAddController">Add Lesson</a></td>
                 
             </c:otherwise>
                 

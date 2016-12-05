@@ -15,18 +15,49 @@
     <body>
         <h1> Welcome ! </h1>
         Please enter the lesson : <br>
-  
-                <form method="POST"> 
-			Time start : <input name='time_start'><br>
-			Time end : <input name='time_end'><br>
-                        Title : <input name='title'><br>
-                        Class room : <input name='class_room'><br>
-                        Teacher : <input name='teacher'><br>
-			<input type='submit' name='action' value='Add'>
-		</form>
-		
+
+        <form method="POST" action='AddLessonController'> 
+            Time start : <input name='time_start' type='text'><br>
+            Time end : <input name='time_end' type='text' ><br>
+            Title : <input name='title' type='text' ><br>
+
+            Class room : <select name = 'room' type='text' value=${lesson.getClass_room()}>
+                <c:forEach var="rooms" items="${rooms}">
+                    <option value='${rooms.getId()}'> 
+                        ${rooms.getBuilding()} ${rooms.getRoom_number()} ( ${rooms.getCapacity()} places) 
+                    </option> 
+                </c:forEach>
+            </select>
+
+
+            <c:if test="${sessionScope.userEntity.getIsAdmin()}">
+                Teacher : <select name = 'teacher' type='text' value=${lesson.getTeacher()}>
+                    <c:forEach var="teacher" items="${teacherNames}">
+                        <option value='${teacher.getId()}'> 
+                            ${teacher.getLastName()} ${teacher.getFirstName()} 
+                        </option> 
+                    </c:forEach>
+                </select>
+            </c:if>  
+                
+                <br>
+                <fieldset>
+                    <legend>Degree</legend>
+                
+                <c:forEach var="degrees" items="${degrees}">
+                    <input type='checkbox' name = 'degree' value='${degrees.getId()}'> 
+                        ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
+                    </input>
+                </c:forEach>
+                    </fieldset>
+                
         
-        
-        
+            <input type='submit' value='add'>
+        </form>
+            
+        <form action='StaffController'>
+            <input type='submit' value='cancel'>
+        </form>
+
     </body>
 </html>
