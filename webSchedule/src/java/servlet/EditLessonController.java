@@ -44,57 +44,47 @@ public class EditLessonController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, DAOException {
-        
-         Staff user = (Staff) request.getSession().getAttribute("userEntity");
-         
-        int id =  Integer.parseInt(request.getParameter("id"));
-        Timestamp timeStart  = Timestamp.valueOf(request.getParameter("time_start"));
-        Timestamp timeEnd  = Timestamp.valueOf(request.getParameter("time_end"));
-        String title = request.getParameter("title");
-        int room =  Integer.parseInt(request.getParameter("room"));
-        Staff teach = user;
-        
-        
-        if(user.getIsAdmin()){
-            int teacher =  Integer.parseInt(request.getParameter("teacher"));
-            StaffDAO s = new StaffDAO();
-            teach = s.getById(teacher);
-        }
-        
-        
-        String[] degree = request.getParameterValues("degree");
 
-        ArrayList<Degree> participants = new ArrayList<Degree>();
-        for (int i = 0; i < degree.length; ++i) {
-            DegreeDAO d = new DegreeDAO();
-            int idD = Integer.parseInt(degree[i]);
-            participants.add(d.getById(idD));
-        }
-        
-        Class_roomDAO clD = new Class_roomDAO();
-        Class_room classRoom = clD.getById(room);
-        
+        Staff user = (Staff) request.getSession().getAttribute("userEntity");
         LessonDAO l = new LessonDAO();
-        
-        if (user.getIsAdmin()) {
-            Lesson lessonE = new Lesson(id, timeStart, timeEnd, title,classRoom , teach, participants);
+        int id = Integer.parseInt(request.getParameter("id"));
+        Lesson lesson = l.getById(id);
+
+        if (user.getIsAdmin() || lesson.getTeacher().getId() == user.getId()) {
+
+            Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start"));
+            Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end"));
+            String title = request.getParameter("title");
+            int room = Integer.parseInt(request.getParameter("room"));
+            Staff teach = user;
+
+            if (user.getIsAdmin()) {
+                int teacher = Integer.parseInt(request.getParameter("teacher"));
+                StaffDAO s = new StaffDAO();
+                teach = s.getById(teacher);
+            }
+
+            String[] degree = request.getParameterValues("degree");
+
+            ArrayList<Degree> participants = new ArrayList<Degree>();
+            for (int i = 0; i < degree.length; ++i) {
+                DegreeDAO d = new DegreeDAO();
+                int idD = Integer.parseInt(degree[i]);
+                participants.add(d.getById(idD));
+            }
+
+            Class_roomDAO clD = new Class_roomDAO();
+            Class_room classRoom = clD.getById(room);
+
+            Lesson lessonE = new Lesson(id, timeStart, timeEnd, title, classRoom, teach, participants);
             l.edit(lessonE);
+
+        } else {
+            request.setAttribute("errorMessage", "impossible d'éditer un cours dont vous n'êtes pas l'auteur");
         }
-        else{
-            Lesson lesson = l.getById(id);
-        
-            if(lesson.getTeacher()==user){
-               Lesson lessonE = new Lesson(id, timeStart, timeEnd, title,classRoom , teach, participants);
-               l.edit(lessonE); 
-            }
-            else{
-                request.setAttribute("errorMessage", "impossible d'éditer un cours dont vous n'êtes pas l'auteur");
-            }
-        }
-        
-        
+
         request.getRequestDispatcher("StaffController").forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

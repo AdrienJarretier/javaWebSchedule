@@ -26,7 +26,7 @@
                          <br>
             Time end : <input name='time_end' type='text' value='<fmt:formatDate value="${lesson.getTimeEnd()}" pattern="YYYY-MM-dd HH:mm:ss" />'><br>
             Title : <input name='title' type='text' value=${lesson.getTitle()}><br>
-            Class room : <select name = 'room' type='text' value=${lesson.getClass_room()}>
+            Class room : <select name = 'room' type='text' value='${lesson.getClass_room()}'>
                 <c:forEach var="rooms" items="${rooms}">
                     <option value='${rooms.getId()}'> ${rooms.getBuilding()} ${rooms.getRoom_number()} ( ${rooms.getCapacity()} places) </option> 
                 </c:forEach>
@@ -34,7 +34,7 @@
             </select>
 
             <c:if test="${sessionScope.userEntity.getIsAdmin()}">
-                Teacher : <select name = 'teacher' type='text' value=${lesson.getTeacher()}>
+                Teacher : <select name = 'teacher' type='text' value='${lesson.getTeacher()}'>
                     <c:forEach var="teacher" items="${teacherNames}">
                         <option value='${teacher.getId()}'> ${teacher.getLastName()} ${teacher.getFirstName()} </option> 
                     </c:forEach>
