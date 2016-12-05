@@ -16,14 +16,15 @@
     <body>
         <h1> Welcome ! </h1>
         Edit lesson : <br>
-            
-            <%--<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-d hh:mm:ss" dateStyle="full"/>--%>
+        <div style="color:red">${errorMessage}</div>
+        
+        <%--<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-d hh:mm:ss" dateStyle="full"/>--%>
         <form method="POST" action='EditLessonController'> 
             <input name='id' type='hidden' value=${lesson.getId()}><br>
             Time start : <input name='time_start' type='text'
-                            value='<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-dd HH:mm:ss" />'      
-                         >
-                         <br>
+                                value='<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-dd HH:mm:ss" />'      
+                                >
+            <br>
             Time end : <input name='time_end' type='text' value='<fmt:formatDate value="${lesson.getTimeEnd()}" pattern="YYYY-MM-dd HH:mm:ss" />'><br>
             Title : <input name='title' type='text' value=${lesson.getTitle()}><br>
             Class room : <select name = 'room' type='text' value='${lesson.getClass_room()}'>
@@ -41,19 +42,19 @@
 
                 </select>
             </c:if>
-            
-             <br>
-                <fieldset>
-                    <legend>Degree</legend>
-                
+
+            <br>
+            <fieldset>
+                <legend>Degree</legend>
+
                 <c:forEach var="degrees" items="${degrees}">
                     <input type='checkbox' name = 'degree' value='${degrees.getId()}'> 
-                        ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
+                    ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
                     </input>
                 </c:forEach>
-                    </fieldset>
-             
-             
+            </fieldset>
+
+
             <input type='submit' name='action' value='Edit'>
         </form>
 

@@ -15,7 +15,9 @@
     </head>
     <body>
         <h1> Are you sure you want to delete this lesson ${param.id} ? </h1>
-
+        
+        <div style="color:red">${errorMessage}</div>
+        
         <form action='RemoveLessonController' method='POST'>
             <input type ='hidden' value ='${param.id}' name='id'>
             <input type='submit' value='remove'>

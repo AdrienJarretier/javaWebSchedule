@@ -15,7 +15,7 @@
     <body>
         <h1> Welcome ! </h1>
         Please enter the lesson : <br>
-
+        
         <form method="POST" action='AddLessonController'> 
             Dates must be of this type : year-month-day h:min:s <br>
             Time start : <input name='time_start' type='text'><br>
