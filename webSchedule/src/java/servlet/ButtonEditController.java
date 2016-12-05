@@ -62,6 +62,8 @@ public class ButtonEditController extends HttpServlet {
             DegreeDAO d = new DegreeDAO();
             ArrayList<Degree> degrees = d.getDegrees();
                 
+            System.out.println(lesson.getTimeStart());
+            
             request.setAttribute("degrees", degrees);
             request.setAttribute("lesson", lesson);
             request.setAttribute("rooms", rooms);

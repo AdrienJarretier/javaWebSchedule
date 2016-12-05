@@ -45,12 +45,22 @@ public class EditLessonController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, DAOException {
         
+         Staff user = (Staff) request.getSession().getAttribute("userEntity");
+         
         int id =  Integer.parseInt(request.getParameter("id"));
         Timestamp timeStart  = Timestamp.valueOf(request.getParameter("time_start"));
         Timestamp timeEnd  = Timestamp.valueOf(request.getParameter("time_end"));
         String title = request.getParameter("title");
         int room =  Integer.parseInt(request.getParameter("room"));
-        int teacher =  Integer.parseInt(request.getParameter("teacher"));
+        Staff teach = user;
+        
+        
+        if(user.getIsAdmin()){
+            int teacher =  Integer.parseInt(request.getParameter("teacher"));
+            StaffDAO s = new StaffDAO();
+            teach = s.getById(teacher);
+        }
+        
         
         String[] degree = request.getParameterValues("degree");
 
@@ -64,13 +74,24 @@ public class EditLessonController extends HttpServlet {
         Class_roomDAO clD = new Class_roomDAO();
         Class_room classRoom = clD.getById(room);
         
-        StaffDAO s = new StaffDAO();
-        Staff teach = s.getById(teacher);
-        
-        
-        Lesson lesson = new Lesson(id, timeStart, timeEnd, title,classRoom , teach, participants);
         LessonDAO l = new LessonDAO();
-        l.edit(lesson);
+        
+        if (user.getIsAdmin()) {
+            Lesson lessonE = new Lesson(id, timeStart, timeEnd, title,classRoom , teach, participants);
+            l.edit(lessonE);
+        }
+        else{
+            Lesson lesson = l.getById(id);
+        
+            if(lesson.getTeacher()==user){
+               Lesson lessonE = new Lesson(id, timeStart, timeEnd, title,classRoom , teach, participants);
+               l.edit(lessonE); 
+            }
+            else{
+                request.setAttribute("errorMessage", "impossible d'éditer un cours dont vous n'êtes pas l'auteur");
+            }
+        }
+        
         
         request.getRequestDispatcher("StaffController").forward(request, response);
         

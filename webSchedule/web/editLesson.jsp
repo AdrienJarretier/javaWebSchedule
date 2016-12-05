@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,11 +16,15 @@
     <body>
         <h1> Welcome ! </h1>
         Edit lesson : <br>
-
+            
+            <%--<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-d hh:mm:ss" dateStyle="full"/>--%>
         <form method="POST" action='EditLessonController'> 
-            Id : <input name='id' type='text' value=${lesson.getId()}><br>
-            Time start : <input name='time_start' type='text' value=${lesson.getTimeStart()}><br>
-            Time end : <input name='time_end' type='text' value=${lesson.getTimeEnd()}><br>
+            <input name='id' type='hidden' value=${lesson.getId()}><br>
+            Time start : <input name='time_start' type='text'
+                            value='<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-dd HH:mm:ss" />'      
+                         >
+                         <br>
+            Time end : <input name='time_end' type='text' value='<fmt:formatDate value="${lesson.getTimeEnd()}" pattern="YYYY-MM-dd HH:mm:ss" />'><br>
             Title : <input name='title' type='text' value=${lesson.getTitle()}><br>
             Class room : <select name = 'room' type='text' value=${lesson.getClass_room()}>
                 <c:forEach var="rooms" items="${rooms}">

@@ -46,6 +46,7 @@
                         <th>Time_end</th>
                         <th>Title</th>
                         <th>Class_room</th>
+                        <th>Participants</th>
                         <c:if test="${sessionScope.userEntity.getIsAdmin()}" > 
                             <th>Teacher</th>
                         </c:if>
@@ -60,6 +61,13 @@
                             <td>${lesson.getTimeEnd()}</td>
                             <td>${lesson.getTitle()}</td>
                             <td>${lesson.getClass_room().getBuilding()} ${lesson.getClass_room().getRoom_number()}</td>
+                            
+                            <td>
+                            <c:forEach var="degree" items="${lesson.getParticipants()}">
+                                ${degree.getName()}
+                            </c:forEach>
+                                </td>
+                            
                             <c:if test="${sessionScope.userEntity.getIsAdmin()}" > 
                                 <td>${lesson.getTeacher().getLastName()}</td>
                             </c:if>
@@ -68,18 +76,16 @@
                         </tr>
                         
                     </c:forEach>
-                        
-                    <!--                        <form method="POST"> 
-                                                <input type='submit' name='action' value='Logout'>
-                                                
-                                            </form>-->
-
+                    
                 </table>
+                <br>
                 <td><a href="ButtonAddController">Add Lesson</a></td>
-                
+                <br>
             </c:otherwise>
                 
         </c:choose>
-                
+         <form action='Logout'>
+            <input type='submit' value='Logout'>
+        </form>       
     </body>
 </html>
