@@ -18,8 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.DAOException;
+import model.DegreeDAO;
 import model.LessonDAO;
 import model.StaffDAO;
+import model.entities.Degree;
 import model.entities.Lesson;
 import model.entities.Staff;
 
@@ -52,19 +54,20 @@ public class AjaxScheduleDatasServlet extends HttpServlet {
 
                 Gson gson = new Gson();
                 String gsonData = "";
+                ArrayList<Lesson> schedule = null;
 
                 if (name.equals("teacher")) {
 
                     Staff teacher = (new StaffDAO()).getById(id);
+                    schedule = dao.getSchedule(teacher);
 
-                    ArrayList<Lesson> schedule = dao.getSchedule(teacher);
+                } else if (name.equals("degree")) {
 
-                    gsonData = gson.toJson(schedule);
+                    Degree degree = (new DegreeDAO()).getById(id);
+                    schedule = dao.getSchedule(degree);
                 }
-//            else if (name.equals("degree")) {
-//
-//                Degree degree = (new DegreeDAO()).getById(id);
-//            }
+
+                gsonData = gson.toJson(schedule);
 
                 System.out.println(gsonData);
                 pwout.println(gsonData);
