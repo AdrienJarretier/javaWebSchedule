@@ -36,6 +36,7 @@
 
                 dataTable.addColumn({type: 'string', id: 'class_room'});
                 dataTable.addColumn({type: 'string', id: 'title'});
+//                dataTable.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
                 dataTable.addColumn({type: 'date', id: 'start'});
                 dataTable.addColumn({type: 'date', id: 'end'});
 
@@ -45,10 +46,24 @@
                     console.log("lesson :");
                     console.log(lesson);
                     var cr = lesson.class_room;
-                    dataTable.addRow([cr.building + ' ' + cr.room_number, lesson.title, new Date(lesson.timeStart), new Date(lesson.timeEnd)]);
+                    dataTable.addRow(
+                            [
+                                cr.building + ' ' + cr.room_number,
+                                lesson.title,
+//                                '<strong>' + lesson.title + '</strong><hr>\n\
+//                                <strong>' + cr.building + ' ' + cr.room_number + '</strong> : ',
+                                new Date(lesson.timeStart),
+                                new Date(lesson.timeEnd)
+                            ]);
                 }
 
-                chart.draw(dataTable);
+//                var options = {
+//                    tooltip: {isHtml: true},
+//                };
+
+                chart.draw(dataTable
+//                , options
+                        );
             }
 
             function showError(xhr, status, message) {
