@@ -20,6 +20,7 @@ import model.DAOException;
 import model.DegreeDAO;
 import model.LessonDAO;
 import model.entities.Degree;
+import model.entities.Staff;
 
 /**
  *
@@ -39,12 +40,18 @@ public class AddLessonController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, DAOException {
-
+        Staff user = (Staff) request.getSession().getAttribute("userEntity");
+        
         Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start"));
         Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end"));
         String title = request.getParameter("title");
         int room = Integer.parseInt(request.getParameter("room"));
-        int teacher = Integer.parseInt(request.getParameter("teacher"));
+        int teacher = user.getId();
+        
+        if(user.getIsAdmin()){
+            teacher = Integer.parseInt(request.getParameter("teacher"));
+        }
+        
         String[] degree = request.getParameterValues("degree");
 
         ArrayList<Degree> participants = new ArrayList<Degree>();

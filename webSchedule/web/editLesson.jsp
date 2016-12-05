@@ -18,7 +18,7 @@
         Edit lesson : <br>
         <div style="color:red">${errorMessage}</div>
         
-        <%--<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-d hh:mm:ss" dateStyle="full"/>--%>
+        
         <form method="POST" action='EditLessonController'> 
             <input name='id' type='hidden' value=${lesson.getId()}><br>
             Time start : <input name='time_start' type='text'
