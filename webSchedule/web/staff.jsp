@@ -51,7 +51,7 @@
                         <th>Time_end</th>
                         <th>Title</th>
                         <th>Class_room</th>
-                        <th>Participants</th>
+                        <th>Attending</th>
                         <c:if test="${sessionScope.userEntity.getIsAdmin()}" > 
                             <th>Teacher</th>
                         </c:if>

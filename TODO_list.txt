@@ -18,5 +18,6 @@ in forms for lesson, input for times set to date time instead of text
 
 when listing lessons, display the degrees attending
 
-<fmt:formatDate value="${now}" type="date"
-    dateStyle="full"/>
+for selects and checkboxes in forms when editing makes them selected / checked
+
+when submitting forms, handle errors, like fiels empty instead of letting it crash
