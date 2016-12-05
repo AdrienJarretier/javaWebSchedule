@@ -6,13 +6,20 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.DAOException;
 import model.LessonDAO;
+import model.StaffDAO;
+import model.entities.Lesson;
+import model.entities.Staff;
 
 /**
  *
@@ -32,10 +39,31 @@ public class AjaxScheduleDatasServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        System.out.println( request.getParameter("name") );
-        System.out.println( request.getParameter("teacherId") );
-        
+
+        String name = request.getParameter("name");
+        int id = Integer.parseInt(request.getParameter("teacherId"));
+
+        try {
+            LessonDAO dao = new LessonDAO();
+
+            if (name.equals("teacher")) {
+
+                Staff teacher = (new StaffDAO()).getById(id);
+
+                ArrayList<Lesson> schedule = dao.getSchedule(teacher);
+
+            }
+//            else if (name.equals("degree")) {
+//
+//                Degree degree = (new DegreeDAO()).getById(id);
+//            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AjaxScheduleDatasServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOException ex) {
+            Logger.getLogger(AjaxScheduleDatasServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 //        response.setContentType("application/json;charset=UTF-8");
 //        try (PrintWriter out = response.getWriter()) {
 //            
