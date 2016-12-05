@@ -17,8 +17,8 @@
         <h1> Welcome ! </h1>
         Edit lesson : <br>
         <div style="color:red">${errorMessage}</div>
-        
-        
+
+
         <form method="POST" action='EditLessonController'> 
             <input name='id' type='hidden' value=${lesson.getId()}><br>
             Time start : <input name='time_start' type='text'
