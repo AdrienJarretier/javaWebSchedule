@@ -43,11 +43,11 @@ public class StaffController extends HttpServlet {
 
         if (user.getIsAdmin()) {
             ArrayList<Lesson> lessons = l.getSchedule();
-            request.getSession().setAttribute("lessons", lessons);
+            request.setAttribute("lessons", lessons);
             
         } else {
             ArrayList<Lesson> lessons = l.getSchedule(user);
-            request.getSession().setAttribute("lessons", lessons);
+            request.setAttribute("lessons", lessons);
             
         }
 

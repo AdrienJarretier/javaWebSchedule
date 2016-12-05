@@ -64,7 +64,7 @@
                                 <td>${lesson.getTeacher().getLastName()}</td>
                             </c:if>
                            <td><a href="ButtonEditController?id=${lesson.getId()}">Edit</a></td>
-                           <td><a href="RemoveLessonController?id=${lesson.getId()}">Remove</a></td>
+                           <td><a href="removeLesson.jsp?id=${lesson.getId()}">Remove</a></td>
                         </tr>
                         
                     </c:forEach>

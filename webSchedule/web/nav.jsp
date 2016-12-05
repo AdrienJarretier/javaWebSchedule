@@ -27,7 +27,7 @@
 
             <c:otherwise>
                 <li>
-                    <a href="staff.jsp"> View lessons </a>
+                    <a href="StaffController"> View lessons </a>
                 </li>
 
             </c:otherwise>

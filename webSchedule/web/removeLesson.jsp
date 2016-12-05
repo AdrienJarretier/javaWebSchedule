@@ -14,11 +14,15 @@
         <title>Remove lesson</title>
     </head>
     <body>
-        <h1> Are you sure you want to delete this lesson ? </h1>
+        <h1> Are you sure you want to delete this lesson ${param.id} ? </h1>
 
-        <form>
-            <input type='submit' name='action' formmethod = 'RemovedLessonController' value='remove'>
-            <input type='submit' name='action' formmethod ='staff.jsp' value='cancel'>
+        <form action='RemoveLessonController' method='POST'>
+            <input type ='hidden' value ='${param.id}' name='id'>
+            <input type='submit' value='remove'>
+        </form>
+
+        <form action='StaffController'>
+            <input type='submit' value='cancel'>
         </form>
 
     </body>
