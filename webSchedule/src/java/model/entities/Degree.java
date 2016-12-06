@@ -5,12 +5,14 @@
  */
 package model.entities;
 
+import java.util.Objects;
+
 /**
  *
  * @author Jarretier Adrien "jarretier.adrien@gmail.com"
  */
 public class Degree {
- 
+
     private int id;
     private String name;
     private int student_count;
@@ -32,7 +34,37 @@ public class Degree {
     public int getStudent_count() {
         return student_count;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Degree other = (Degree) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.student_count != other.student_count) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
+    }
+
     
-    
-    
+
 }
