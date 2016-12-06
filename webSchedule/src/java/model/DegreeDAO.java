@@ -62,8 +62,8 @@ public class DegreeDAO {
         return degrees;
 
     }
-    
-    public Degree getById(int degree_id) throws SQLException, DAOException{
+
+    public Degree getById(int degree_id) throws SQLException, DAOException {
         String sql
                 = " SELECT * FROM " + DEGREE_TABLE
                 + " WHERE id = ?";
@@ -78,8 +78,7 @@ public class DegreeDAO {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             int students_count = rs.getInt("students_count");
-           
-            
+
             Degree deg = new Degree(id, name, students_count);
 
             rs.close();
@@ -96,6 +95,69 @@ public class DegreeDAO {
 
             throw new DAOException("this id does not match any degree");
         }
+    }
+
+    public class DegreeHour {
+
+        private String name;
+        private int hours;
+
+        public DegreeHour(String name, int hours) {
+            this.name = name;
+            this.hours = hours;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getHours() {
+            return hours;
+        }
+    }
+
+    public ArrayList<DegreeHour> lessonHours() throws SQLException {
+
+        String sql = " SELECT time_start, time_end "
+                + " FROM degree "
+                + " INNER JOIN LESSON_PARTICIPANTS "
+                + " ON degree.ID = LESSON_PARTICIPANTS.DEGREE_ID "
+                + " INNER JOIN LESSON "
+                + " ON LESSON_PARTICIPANTS.LESSON_ID = lesson.ID "
+                + " WHERE degree.id = ?";
+
+        ArrayList<Degree> degrees = getDegrees();
+
+        Connection connection = myDataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        ArrayList<DegreeHour> hours = new ArrayList<>(degrees.size());
+
+        for (Degree degree : degrees) {
+
+            stmt.setInt(1, degree.getId());
+
+            ResultSet rs = stmt.executeQuery();
+
+            long sum = 0;
+
+            while (rs.next()) {
+
+                long start = rs.getTimestamp(1).getTime();
+                long end = rs.getTimestamp(2).getTime();
+
+                sum += start - end;
+            }
+
+            rs.close();
+
+            hours.add(new DegreeHour(degree.getName(), (int) (sum / 1000)));
+        }
+
+        stmt.close();
+        connection.close();
+
+        return hours;
     }
 
 }
