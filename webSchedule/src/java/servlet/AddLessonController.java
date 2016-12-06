@@ -40,6 +40,9 @@ public class AddLessonController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, DAOException {
+        
+        request.setCharacterEncoding("UTF-8");
+        
         Staff user = (Staff) request.getSession().getAttribute("userEntity");
         
         Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start"));

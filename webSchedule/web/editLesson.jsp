@@ -11,9 +11,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css" >
+
         <title>Edit lesson</title>
     </head>
     <body>
+        <c:import url="nav.jsp" />
         <h1> Welcome ! </h1>
         Edit lesson : <br>
         <div style="color:red">${errorMessage}</div>

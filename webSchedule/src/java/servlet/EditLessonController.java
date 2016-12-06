@@ -45,6 +45,8 @@ public class EditLessonController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, DAOException {
 
+        request.setCharacterEncoding("UTF-8");
+        
         Staff user = (Staff) request.getSession().getAttribute("userEntity");
         LessonDAO l = new LessonDAO();
         int id = Integer.parseInt(request.getParameter("id"));
@@ -55,6 +57,7 @@ public class EditLessonController extends HttpServlet {
             Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start"));
             Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end"));
             String title = request.getParameter("title");
+            System.out.println(title);
             int room = Integer.parseInt(request.getParameter("room"));
             Staff teach = user;
 

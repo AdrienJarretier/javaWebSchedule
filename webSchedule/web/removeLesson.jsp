@@ -11,9 +11,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css" >
+
         <title>Remove lesson</title>
     </head>
     <body>
+        <c:import url="nav.jsp" />
         <h1> Are you sure you want to delete this lesson ${param.id} ? </h1>
         
         <div style="color:red">${errorMessage}</div>
