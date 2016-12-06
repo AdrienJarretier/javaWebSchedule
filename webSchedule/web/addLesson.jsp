@@ -18,11 +18,11 @@
         <c:import url="nav.jsp" />
         <h1> Welcome ! </h1>
         Please enter the lesson : <br>
-        
+
         <form method="POST" action='AddLessonController'> 
             Dates must be of this type : year-month-day h:min:s <br>
-            Time start : <input name='time_start' type='text'><br>
-            Time end : <input name='time_end' type='text' ><br>
+            Start : <input id='date_timepicker_start' name='time_start' type='text'><br>
+            End : <input id='date_timepicker_end' name='time_end' type='text' ><br>
             Title : <input name='title' type='text' ><br>
 
             Class room : <select name = 'room' type='text' value='${lesson.getClass_room()}'>
@@ -43,25 +43,68 @@
                     </c:forEach>
                 </select>
             </c:if>  
-                
-                <br>
-                <fieldset>
-                    <legend>Degree</legend>
-                
+
+            <br>
+            <fieldset>
+                <legend>Degree</legend>
+
                 <c:forEach var="degrees" items="${degrees}">
                     <input type='checkbox' name = 'degree' value='${degrees.getId()}'> 
-                        ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
+                    ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
                     </input>
                 </c:forEach>
-                    </fieldset>
-                
-        
+            </fieldset>
+
+
             <input type='submit' value='add'>
         </form>
-            
+
         <form action='StaffController'>
             <input type='submit' value='cancel'>
         </form>
 
     </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="dtp/jquery.datetimepicker.css">
+    <script src="dtp/jquery.datetimepicker.full.min.js"></script>
+
+    <script type="text/javascript">
+
+        const THEME = 'dark';
+
+        var ALLOWED_TIMES = [];
+
+        for (var i = 7; i <= 19; ++i) {
+            ALLOWED_TIMES.push(i + ':00');
+            for (var j = 15; j < 60; j += 15) {
+                ALLOWED_TIMES.push(i + ':' + j);
+            }
+        }
+
+        jQuery(function () {
+            jQuery('#date_timepicker_start').datetimepicker({
+                format: 'Y-m-d H:i',
+                onShow: function (ct) {
+                    this.setOptions({
+                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+                    })
+                },
+                minDate: 0,
+                allowTimes: ALLOWED_TIMES,
+                theme: THEME
+            });
+            jQuery('#date_timepicker_end').datetimepicker({
+                format: 'Y-m-d H:i',
+                onShow: function (ct) {
+                    this.setOptions({
+                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : 0
+                    })
+                },
+                allowTimes: ALLOWED_TIMES,
+                theme: THEME
+            });
+        });
+    </script>
 </html>
