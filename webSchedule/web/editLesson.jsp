@@ -31,7 +31,7 @@
 
             Class room : <select name = 'room' type='text' value='${lesson.getClass_room()}'>
                 <c:forEach var="rooms" items="${rooms}">
-                    <option value='${rooms.getId()}'> ${rooms.getBuilding()} ${rooms.getRoom_number()} ( ${rooms.getCapacity()} places) </option> 
+                    <option value='${rooms.getId()}'> ${rooms.getBuilding()} ${rooms.getRoom_number()} ( ${rooms.getCapacity()} seats) </option> 
                 </c:forEach>
 
             </select>
