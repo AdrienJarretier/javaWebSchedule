@@ -16,7 +16,7 @@
         <script type="text/javascript">
 
             google.charts.load("current", {packages: ["corechart"]});
-            google.charts.setOnLoadCallback(drawChart);
+            
 
 
             function draw(result) {
@@ -24,8 +24,9 @@
                 console.log(result);
 
                 var tab = [];
-                tab.push(['Degree', 'students per degree']);
+                tab.push(['Degree', 'count']);
 
+                
 
                 for (var i = 0; i < result.length; ++i) {
 
@@ -46,7 +47,6 @@
 
 
                 var options = {
-                    title: 'Students count per degree',
                     pieHole: 0.4,
                 };
 
@@ -60,11 +60,24 @@
 
             }
 
-            function drawChart() {
+            function drawChartCount() {
 
                 $.ajax({
                     data: {
+                        "param" : "count" 
+                    },
+                    url: "AjaxDegreeDataServlet",
+                    dataType: "json",
+                    success: draw,
+                    error: showError
+                });
+            }
+            
+            function drawChartHour() {
 
+                $.ajax({
+                    data: {
+                        "param" : "hour" 
                     },
                     url: "AjaxDegreeDataServlet",
                     dataType: "json",
@@ -77,7 +90,9 @@
 
                     function () {
 
-                        $("#timelineSelect").change(drawChart);
+                        $("#buttonCount").click(drawChartCount);
+                        $("#buttonHour").click(drawChartHour);
+                        
                     }
 
             );
@@ -87,9 +102,10 @@
     </head>
     <body>
     <c:import url="nav.jsp" />
-
-
+    
     <div id="donutchart" style="width: 900px; height: 500px;"></div>
-
+    
+     <button id="buttonCount" type="button">Student count per degree</button> 
+     <button id="buttonHour" type="button">Hour per degree</button> 
 </body>
 </html>

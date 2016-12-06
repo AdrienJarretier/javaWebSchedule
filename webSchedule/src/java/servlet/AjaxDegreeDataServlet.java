@@ -43,33 +43,36 @@ public class AjaxDegreeDataServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //String name = request.getParameter("name");
+            String param = request.getParameter("param");
             //int id = Integer.parseInt(request.getParameter("degreeID"));
-            
-            try{
+
+            try {
                 LessonDAO dao = new LessonDAO();
-                
+
                 Gson gson = new Gson();
                 String gsonData = "";
                 ArrayList<Degree> degrees = null;
-                
-                //if (name.equals("count")){
-                    
                 DegreeDAO degDAO = new DegreeDAO();
-                degrees = degDAO.getDegrees();  
-                     
-                //} 
-                
+
+                if (param.equals("count")) {
+
+                    degrees = degDAO.getDegrees();
+
+                } else {
+                    degrees = degDAO.lessonHours();
+                }
+
                 gsonData = gson.toJson(degrees);
 
                 System.out.println(gsonData);
                 out.println(gsonData);
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(AjaxScheduleDatasServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }   
+        }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -82,9 +85,9 @@ public class AjaxDegreeDataServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-            processRequest(request, response);
-        
+
+        processRequest(request, response);
+
     }
 
     /**
@@ -98,9 +101,9 @@ public class AjaxDegreeDataServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-            processRequest(request, response);
-        
+
+        processRequest(request, response);
+
     }
 
     /**
