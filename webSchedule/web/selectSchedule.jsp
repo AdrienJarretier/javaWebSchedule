@@ -14,6 +14,7 @@
 
         <!--Load the ajax api and the google charts api-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script type="text/javascript">
 
@@ -21,7 +22,7 @@
             google.charts.load('current', {packages: ['timeline']});
 
             // set a callback to run when the google vis api is loaded
-            google.charts.setOnLoadCallback(drawChart);
+//            google.charts.setOnLoadCallback(drawChart);
 
             function draw(result) {
 
@@ -122,7 +123,7 @@
                 <c:when test="${!empty teachers}" >      
                     <select id="timelineSelect" name="teacher">
 
-                        <!--<option disabled selected> Teachers </option>-->
+                        <option disabled selected> Teachers </option>
 
                         <c:forEach var="teacher" items="${teachers}">
                             <option value='${teacher.getId()}'> ${teacher.getLastName()} ${teacher.getFirstName()} </option> 
@@ -135,7 +136,7 @@
                 <c:when test="${!empty degrees}" >
                     <select id="timelineSelect" name="degree">
 
-                        <!--<option disabled selected> Degrees </option>-->
+                        <option disabled selected> Degrees </option>
 
                         <c:forEach var="degree" items="${degrees}">
                             <option value='${degree.getId()}'> ${degree.getName()} </option> 
