@@ -43,8 +43,8 @@ public class AjaxDegreeDataServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String name = request.getParameter("name");
-            int id = Integer.parseInt(request.getParameter("degreeID"));
+            //String name = request.getParameter("name");
+            //int id = Integer.parseInt(request.getParameter("degreeID"));
             
             try{
                 LessonDAO dao = new LessonDAO();
@@ -53,12 +53,12 @@ public class AjaxDegreeDataServlet extends HttpServlet {
                 String gsonData = "";
                 ArrayList<Degree> degrees = null;
                 
-                if (name.equals("count")){
+                //if (name.equals("count")){
                     
-                    DegreeDAO degDAO = new DegreeDAO();
-                    degrees = degDAO.getDegrees();  
+                DegreeDAO degDAO = new DegreeDAO();
+                degrees = degDAO.getDegrees();  
                      
-                } 
+                //} 
                 
                 gsonData = gson.toJson(degrees);
 
