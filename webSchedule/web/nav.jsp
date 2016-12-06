@@ -17,6 +17,9 @@
         <li>
             <a href="SelectSchedule?type=degrees">Degrees Schedules</a>
         </li>
+        <li>
+            <a href="degreeStat.jsp">Degrees Stats</a>
+        </li>
 
         <c:choose>
             <c:when test="${empty sessionScope.userEntity}" >

@@ -100,11 +100,11 @@ public class DegreeDAO {
     public class DegreeHour {
 
         private String name;
-        private int hours;
+        private int student_count; // hours
 
         public DegreeHour(String name, int hours) {
             this.name = name;
-            this.hours = hours;
+            this.student_count = hours;
         }
 
         public String getName() {
@@ -112,7 +112,7 @@ public class DegreeDAO {
         }
 
         public int getHours() {
-            return hours;
+            return student_count;
         }
     }
 
@@ -146,7 +146,7 @@ public class DegreeDAO {
                 long start = rs.getTimestamp(1).getTime();
                 long end = rs.getTimestamp(2).getTime();
 
-                sum += start - end;
+                sum += end - start;
             }
 
             rs.close();

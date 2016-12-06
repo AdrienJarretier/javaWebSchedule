@@ -17,11 +17,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.DAOException;
 import model.DegreeDAO;
 import model.LessonDAO;
 import model.entities.Degree;
-import model.entities.Lesson;
 
 /**
  *
@@ -54,18 +52,16 @@ public class AjaxDegreeDataServlet extends HttpServlet {
                 DegreeDAO degDAO = new DegreeDAO();
 
                 if (param.equals("count")) {
-                    
+
                     ArrayList<Degree> degrees = degDAO.getDegrees();
                     gsonData = gson.toJson(degrees);
-                    
-                } else {
-                    
-                    ArrayList<String> degrees = degDAO.lessonHours();
-                    gsonData = gson.toJson(degrees);
-                    
-                }
 
-                
+                } else {
+
+                    ArrayList<DegreeDAO.DegreeHour> degrees = degDAO.lessonHours();
+                    gsonData = gson.toJson(degrees);
+
+                }
 
                 System.out.println(gsonData);
                 out.println(gsonData);
