@@ -24,11 +24,11 @@
 
         <form method="POST" action='EditLessonController'> 
             <input name='id' type='hidden' value='${lesson.getId()}'><br>
-            Time start : <input name='time_start' type='text'
-                                value='<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-dd HH:mm:ss" />'      
-                                >
+            Start : <input id='date_timepicker_start' name='time_start' type='text'
+                           value='<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-dd HH:mm:ss" />'      
+                           >
             <br>
-            Time end : <input name='time_end' type='text' value='<fmt:formatDate value="${lesson.getTimeEnd()}" pattern="YYYY-MM-dd HH:mm:ss" />'><br>
+            End : <input id='date_timepicker_end' name='time_end' type='text' value='<fmt:formatDate value="${lesson.getTimeEnd()}" pattern="YYYY-MM-dd HH:mm:ss" />'><br>
 
             Title : <input name='title' type='text' value='${lesson.getTitle()}'><br>
 
@@ -70,7 +70,46 @@
     </body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css">
+
+    <link rel="stylesheet" type="text/css" href="dtp/jquery.datetimepicker.css">
     <script src="dtp/jquery.datetimepicker.full.min.js"></script>
+
+    <script type="text/javascript">
+
+        const THEME = 'dark';
+
+        var ALLOWED_TIMES = [];
+
+        for (var i = 7; i <= 19; ++i) {
+            ALLOWED_TIMES.push(i + ':00');
+            for (var j = 15; j < 60; j += 15) {
+                ALLOWED_TIMES.push(i + ':' + j);
+            }
+        }
+
+        jQuery(function () {
+            jQuery('#date_timepicker_start').datetimepicker({
+                format: 'Y-m-d H:i',
+                onShow: function (ct) {
+                    this.setOptions({
+                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+                    })
+                },
+                minDate: 0,
+                allowTimes: ALLOWED_TIMES,
+                theme: THEME
+            });
+            jQuery('#date_timepicker_end').datetimepicker({
+                format: 'Y-m-d H:i',
+                onShow: function (ct) {
+                    this.setOptions({
+                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : 0
+                    })
+                },
+                allowTimes: ALLOWED_TIMES,
+                theme: THEME
+            });
+        });
+    </script>
 
 </html>

@@ -21,8 +21,8 @@
 
         <form method="POST" action='AddLessonController'> 
             Dates must be of this type : year-month-day h:min:s <br>
-            Time start : <input id='date_timepicker_start' name='time_start' type='text'><br>
-            Time end : <input id='date_timepicker_end' name='time_end' type='text' ><br>
+            Start : <input id='date_timepicker_start' name='time_start' type='text'><br>
+            End : <input id='date_timepicker_end' name='time_end' type='text' ><br>
             Title : <input name='title' type='text' ><br>
 
             Class room : <select name = 'room' type='text' value='${lesson.getClass_room()}'>
@@ -75,11 +75,7 @@
         const THEME = 'dark';
 
         var ALLOWED_TIMES = [];
-//        
-//        ALLOWED_TIMES.push('09:00');
-//        for(var j=15; j<60; j+=15) {
-//            ALLOWED_TIMES.push(i + ':' + j);
-//        }
+
         for (var i = 7; i <= 19; ++i) {
             ALLOWED_TIMES.push(i + ':00');
             for (var j = 15; j < 60; j += 15) {
