@@ -18,11 +18,11 @@
         <c:import url="nav.jsp" />
         <h1> Welcome ! </h1>
         Please enter the lesson : <br>
-        
+
         <form method="POST" action='AddLessonController'> 
             Dates must be of this type : year-month-day h:min:s <br>
-            Time start : <input name='time_start' type='text'><br>
-            Time end : <input name='time_end' type='text' ><br>
+            Time start : <input id='date_timepicker_start' name='time_start' type='text'><br>
+            Time end : <input id='date_timepicker_end' name='time_end' type='text' ><br>
             Title : <input name='title' type='text' ><br>
 
             Class room : <select name = 'room' type='text' value='${lesson.getClass_room()}'>
@@ -43,25 +43,61 @@
                     </c:forEach>
                 </select>
             </c:if>  
-                
-                <br>
-                <fieldset>
-                    <legend>Degree</legend>
-                
+
+            <br>
+            <fieldset>
+                <legend>Degree</legend>
+
                 <c:forEach var="degrees" items="${degrees}">
                     <input type='checkbox' name = 'degree' value='${degrees.getId()}'> 
-                        ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
+                    ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
                     </input>
                 </c:forEach>
-                    </fieldset>
-                
-        
+            </fieldset>
+
+
             <input type='submit' value='add'>
         </form>
-            
+
         <form action='StaffController'>
             <input type='submit' value='cancel'>
         </form>
 
     </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css">
+    <script src="dtp/jquery.datetimepicker.full.min.js"></script>
+
+    <script type="text/javascript">
+
+        jQuery('#date_timepicker_start').datetimepicker({
+            timepicker: false,
+            formatDate: 'Y/m/d',
+            minDate: '-1970/01/02', //yesterday is minimum date(for today use 0 or -1970/01/01)
+            maxDate: '+1970/01/02'//tomorrow is maximum date calendar
+        });
+
+//        jQuery(function () {
+//            jQuery('#date_timepicker_start').datetimepicker({
+//                format: 'Y/m/d',
+//                onShow: function (ct) {
+//                    this.setOptions({
+//                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+//                    })
+//                },
+//                timepicker: false
+//            });
+//            jQuery('#date_timepicker_end').datetimepicker({
+//                format: 'Y/m/d',
+//                onShow: function (ct) {
+//                    this.setOptions({
+//                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
+//                    })
+//                },
+//                timepicker: false
+//            });
+//        });
+    </script>
 </html>
