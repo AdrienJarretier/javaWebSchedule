@@ -72,32 +72,43 @@
 
     <script type="text/javascript">
 
-        jQuery('#date_timepicker_start').datetimepicker({
-            timepicker: false,
-            formatDate: 'Y/m/d',
-            minDate: '-1970/01/02', //yesterday is minimum date(for today use 0 or -1970/01/01)
-            maxDate: '+1970/01/02'//tomorrow is maximum date calendar
-        });
+        const THEME = 'dark';
 
-//        jQuery(function () {
-//            jQuery('#date_timepicker_start').datetimepicker({
-//                format: 'Y/m/d',
-//                onShow: function (ct) {
-//                    this.setOptions({
-//                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
-//                    })
-//                },
-//                timepicker: false
-//            });
-//            jQuery('#date_timepicker_end').datetimepicker({
-//                format: 'Y/m/d',
-//                onShow: function (ct) {
-//                    this.setOptions({
-//                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
-//                    })
-//                },
-//                timepicker: false
-//            });
-//        });
+        var ALLOWED_TIMES = [];
+//        
+//        ALLOWED_TIMES.push('09:00');
+//        for(var j=15; j<60; j+=15) {
+//            ALLOWED_TIMES.push(i + ':' + j);
+//        }
+        for (var i = 7; i <= 19; ++i) {
+            ALLOWED_TIMES.push(i + ':00');
+            for (var j = 15; j < 60; j += 15) {
+                ALLOWED_TIMES.push(i + ':' + j);
+            }
+        }
+
+        jQuery(function () {
+            jQuery('#date_timepicker_start').datetimepicker({
+                format: 'Y-m-d H:i',
+                onShow: function (ct) {
+                    this.setOptions({
+                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+                    })
+                },
+                minDate: 0,
+                allowTimes: ALLOWED_TIMES,
+                theme: THEME
+            });
+            jQuery('#date_timepicker_end').datetimepicker({
+                format: 'Y-m-d H:i',
+                onShow: function (ct) {
+                    this.setOptions({
+                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : 0
+                    })
+                },
+                allowTimes: ALLOWED_TIMES,
+                theme: THEME
+            });
+        });
     </script>
 </html>
