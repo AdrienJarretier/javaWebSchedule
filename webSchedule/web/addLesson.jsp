@@ -67,7 +67,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="dtp/jquery.datetimepicker.css">
     <script src="dtp/jquery.datetimepicker.full.min.js"></script>
 
     <script type="text/javascript">
