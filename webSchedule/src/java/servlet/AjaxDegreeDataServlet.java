@@ -51,18 +51,21 @@ public class AjaxDegreeDataServlet extends HttpServlet {
 
                 Gson gson = new Gson();
                 String gsonData = "";
-                ArrayList<Degree> degrees = null;
                 DegreeDAO degDAO = new DegreeDAO();
 
                 if (param.equals("count")) {
-
-                    degrees = degDAO.getDegrees();
-
+                    
+                    ArrayList<Degree> degrees = degDAO.getDegrees();
+                    gsonData = gson.toJson(degrees);
+                    
                 } else {
-                    degrees = degDAO.lessonHours();
+                    
+                    ArrayList<String> degrees = degDAO.lessonHours();
+                    gsonData = gson.toJson(degrees);
+                    
                 }
 
-                gsonData = gson.toJson(degrees);
+                
 
                 System.out.println(gsonData);
                 out.println(gsonData);
