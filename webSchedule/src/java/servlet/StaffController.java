@@ -50,7 +50,7 @@ public class StaffController extends HttpServlet {
             request.setAttribute("lessons", lessons);
             
         }
-
+        
         request.getRequestDispatcher("staff.jsp").forward(request, response);
     }
 
