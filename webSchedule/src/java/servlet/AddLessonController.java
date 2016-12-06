@@ -45,8 +45,8 @@ public class AddLessonController extends HttpServlet {
         
         Staff user = (Staff) request.getSession().getAttribute("userEntity");
         
-        Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start"));
-        Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end"));
+        Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start")+":00");
+        Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end")+":00");
         String title = request.getParameter("title");
         int room = Integer.parseInt(request.getParameter("room"));
         int teacher = user.getId();

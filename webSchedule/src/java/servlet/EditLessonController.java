@@ -54,8 +54,8 @@ public class EditLessonController extends HttpServlet {
 
         if (user.getIsAdmin() || lesson.getTeacher().getId() == user.getId()) {
 
-            Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start"));
-            Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end"));
+            Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start")+":00");
+            Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end")+":00");
             String title = request.getParameter("title");
             System.out.println(title);
             int room = Integer.parseInt(request.getParameter("room"));
