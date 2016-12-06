@@ -32,9 +32,9 @@
 
             Title : <input name='title' type='text' value='${lesson.getTitle()}'><br>
 
-            Class room : <select name = 'room' type='text' value='${lesson.getClass_room()}'>
-                <c:forEach var="rooms" items="${rooms}">
-                    <option value='${rooms.getId()}'> ${rooms.getBuilding()} ${rooms.getRoom_number()} ( ${rooms.getCapacity()} seats) </option> 
+            Class room : <select name = 'room' type='text' >
+                <c:forEach var="room" items="${rooms}" >
+                    <option value='${room.getId()}' ${ (lesson.getClass_room().getId() == room.getId() ? "selected" : "") }> ${room.getBuilding()} ${room.getRoom_number()} ( ${room.getCapacity()} seats) </option> 
                 </c:forEach>
 
             </select>
@@ -42,7 +42,7 @@
             <c:if test="${sessionScope.userEntity.getIsAdmin()}">
                 Teacher : <select name = 'teacher' type='text' value='${lesson.getTeacher()}'>
                     <c:forEach var="teacher" items="${teacherNames}">
-                        <option value='${teacher.getId()}'> ${teacher.getLastName()} ${teacher.getFirstName()} </option> 
+                        <option value='${teacher.getId()}' ${ (lesson.getTeacher().getId() == teacher.getId() ? "selected" : "") }> ${teacher.getLastName()} ${teacher.getFirstName()} </option> 
                     </c:forEach>
 
                 </select>
@@ -52,9 +52,9 @@
             <fieldset>
                 <legend>Degree</legend>
 
-                <c:forEach var="degrees" items="${degrees}">
-                    <input type='checkbox' name = 'degree' value='${degrees.getId()}'> 
-                    ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
+                <c:forEach var="degree" items="${degrees}">
+                    <input type='checkbox' name = 'degree' value='${degree.getId()}' ${ (lesson.getParticipants().contains(degree) ? "checked" : "") }> 
+                    ${degree.getName()} (${degree.getStudent_count()} students) <br>
                     </input>
                 </c:forEach>
             </fieldset>
