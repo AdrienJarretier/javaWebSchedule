@@ -156,7 +156,7 @@
 
         </form>
 
-        <div id="timeline"></div>
+        <div id="timeline" style="height: 512px"></div>
 
     </body>
 </html>
