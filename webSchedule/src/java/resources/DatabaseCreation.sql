@@ -49,7 +49,8 @@ CREATE TABLE lesson (
 	class_room_id INT REFERENCES class_room NOT NULL,
 	teacher_id INT REFERENCES staff,
         CONSTRAINT tscr_un UNIQUE (time_start, class_room_id),
-        CONSTRAINT tst_un UNIQUE (time_start, teacher_id)
+        CONSTRAINT tst_un UNIQUE (time_start, teacher_id),
+        CONSTRAINT end_gt_start_check CHECK (time_end > time_start)
 );
 
 

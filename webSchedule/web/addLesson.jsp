@@ -17,6 +17,7 @@
     <body>
         <c:import url="nav.jsp" />
         <h1> Welcome ! </h1>
+        <div style="color:red">${error}</div>
 
         <form method="POST" action='AddLessonController'> 
         <h2>Please enter the lesson : </h2>

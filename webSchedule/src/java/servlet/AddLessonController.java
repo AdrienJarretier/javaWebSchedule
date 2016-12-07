@@ -40,21 +40,27 @@ public class AddLessonController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, DAOException {
-        
+
         request.setCharacterEncoding("UTF-8");
-        
+
         Staff user = (Staff) request.getSession().getAttribute("userEntity");
-        
-        Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start")+":00");
-        Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end")+":00");
+
+        Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start") + ":00");
+        Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end") + ":00");
+
+        if (timeStart.after(timeEnd)) {
+            request.setAttribute("error", "lesson must ends after it starts");
+            request.getRequestDispatcher("addLesson.jsp").forward(request, response);
+        }
+
         String title = request.getParameter("title");
         int room = Integer.parseInt(request.getParameter("room"));
         int teacher = user.getId();
-        
-        if(user.getIsAdmin()){
+
+        if (user.getIsAdmin()) {
             teacher = Integer.parseInt(request.getParameter("teacher"));
         }
-        
+
         String[] degree = request.getParameterValues("degree");
 
         ArrayList<Degree> participants = new ArrayList<Degree>();
@@ -63,7 +69,7 @@ public class AddLessonController extends HttpServlet {
             int id = Integer.parseInt(degree[i]);
             participants.add(d.getById(id));
         }
-        
+
         LessonDAO l = new LessonDAO();
         l.add(timeStart, timeEnd, title, room, teacher, participants);
 

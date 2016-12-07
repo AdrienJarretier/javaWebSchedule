@@ -46,7 +46,7 @@ public class EditLessonController extends HttpServlet {
             throws ServletException, IOException, SQLException, DAOException {
 
         request.setCharacterEncoding("UTF-8");
-        
+
         Staff user = (Staff) request.getSession().getAttribute("userEntity");
         LessonDAO l = new LessonDAO();
         int id = Integer.parseInt(request.getParameter("id"));
@@ -54,8 +54,15 @@ public class EditLessonController extends HttpServlet {
 
         if (user.getIsAdmin() || lesson.getTeacher().getId() == user.getId()) {
 
-            Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start")+":00");
-            Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end")+":00");
+            Timestamp timeStart = Timestamp.valueOf(request.getParameter("time_start") + ":00");
+            Timestamp timeEnd = Timestamp.valueOf(request.getParameter("time_end") + ":00");
+
+            if (timeStart.after(timeEnd)) {
+                request.setAttribute("error", "lesson must ends after it starts");
+                request.setAttribute("lesson", lesson);
+                request.getRequestDispatcher("editLesson.jsp").forward(request, response);
+            }
+
             String title = request.getParameter("title");
             System.out.println(title);
             int room = Integer.parseInt(request.getParameter("room"));

@@ -18,6 +18,7 @@
     <body>
         <c:import url="nav.jsp" />
         <h1> Welcome ! </h1>
+        <div style="color:red">${error}</div>
         <div style="color:red">${errorMessage}</div>
 
 
@@ -25,10 +26,10 @@
             <h2>Edit lesson : </h2>
             <input name='id' type='hidden' value='${lesson.getId()}'><br>
             Start : <input id='date_timepicker_start' name='time_start' type='text'
-                           value='<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-dd HH:mm:ss" />'      
+                           value='<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-dd HH:mm" />'      
                            >
             <br>
-            End : <input id='date_timepicker_end' name='time_end' type='text' value='<fmt:formatDate value="${lesson.getTimeEnd()}" pattern="YYYY-MM-dd HH:mm:ss" />'><br>
+            End : <input id='date_timepicker_end' name='time_end' type='text' value='<fmt:formatDate value="${lesson.getTimeEnd()}" pattern="YYYY-MM-dd HH:mm" />'><br>
 
             Title : <input name='title' type='text' value='${lesson.getTitle()}'><br>
 
