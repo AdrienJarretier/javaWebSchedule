@@ -46,7 +46,7 @@ CREATE TABLE lesson (
 	time_start TIMESTAMP,
 	time_end TIMESTAMP, 
 	title VARCHAR(30), 
-	class_room_id INT REFERENCES class_room,
+	class_room_id INT REFERENCES class_room NOT NULL,
 	teacher_id INT REFERENCES staff,
         CONSTRAINT tscr_un UNIQUE (time_start, class_room_id),
         CONSTRAINT tst_un UNIQUE (time_start, teacher_id)

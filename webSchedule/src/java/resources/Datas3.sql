@@ -19,13 +19,13 @@ INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-12-05 08:30:00', '2016-12-05 10:30:00', 'Base de données', (SELECT id from class_room WHERE building = 'Multimédia' AND room_nb = 206), (SELECT id from staff WHERE email = 'bertrand.francois@univ.fr'));
+('2016-12-05 08:30:00', '2016-12-05 10:30:00', 'Base de données', (SELECT id from class_room WHERE building = 'Multimedia' AND room_nb = 206), (SELECT id from staff WHERE email = 'bertrand.francois@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L3 informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY) );
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-12-02 14:30:00', '2016-12-02 16:30:00', 'Numération et codage', (SELECT id from class_room WHERE building = 'Jean Jaurès' AND room_nb = 128), (SELECT id from staff WHERE email = 'bertrand.francois@univ.fr'));
+('2016-12-02 14:30:00', '2016-12-02 16:30:00', 'Numération et codage', (SELECT id from class_room WHERE building = 'Jean Jaures' AND room_nb = 128), (SELECT id from staff WHERE email = 'bertrand.francois@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L2 informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY) ),
@@ -33,7 +33,7 @@ INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-12-02 08:00:00', '2016-12-02 10:30:00', 'Numération et codage', (SELECT id from class_room WHERE building = 'Jean Jaurès' AND room_nb = 15), (SELECT id from staff WHERE email = 'bertrand.francois@univ.fr'));
+('2016-12-02 08:00:00', '2016-12-02 10:30:00', 'Numération et codage', (SELECT id from class_room WHERE building = 'Jean Jaures' AND room_nb = 15), (SELECT id from staff WHERE email = 'bertrand.francois@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L1 informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY) ),
@@ -61,7 +61,7 @@ INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2017-12-05 09:45:00', '2017-12-05 12:00:00', 'Chimie', (SELECT id from class_room WHERE building = 'Jean Jaurès' AND room_nb = 128), (SELECT id from staff WHERE email = 'bernard.claude@univ.fr'));
+('2017-12-05 09:45:00', '2017-12-05 12:00:00', 'Chimie', (SELECT id from class_room WHERE building = 'Jean Jaures' AND room_nb = 128), (SELECT id from staff WHERE email = 'bernard.claude@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L2 Mathématiques'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY));
@@ -69,7 +69,7 @@ INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-12-02 13:45:00', '2016-12-02 15:00:00', 'Electronique', (SELECT id from class_room WHERE building = 'Multimédia' AND room_nb = 206), (SELECT id from staff WHERE email = 'bernard.claude@univ.fr'));
+('2016-12-02 13:45:00', '2016-12-02 15:00:00', 'Electronique', (SELECT id from class_room WHERE building = 'Multimedia' AND room_nb = 206), (SELECT id from staff WHERE email = 'bernard.claude@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L3 Informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY));
@@ -96,7 +96,7 @@ INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-12-10 15:45:00', '2016-12-10 18:00:00', 'Anglais : Orale', (SELECT id from class_room WHERE building = 'Jean Jaurès' AND room_nb = 15), (SELECT id from staff WHERE email = 'hoche.genevieve@univ.fr'));
+('2016-12-10 15:45:00', '2016-12-10 18:00:00', 'Anglais : Orale', (SELECT id from class_room WHERE building = 'Jean Jaures' AND room_nb = 15), (SELECT id from staff WHERE email = 'hoche.genevieve@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L2 Informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY) ),
@@ -106,7 +106,7 @@ INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-12-10 08:45:00', '2016-12-10 11:00:00', 'Anglais : compréhension', (SELECT id from class_room WHERE building = 'Multimédia' AND room_nb = 206), (SELECT id from staff WHERE email = 'hoche.genevieve@univ.fr'));
+('2016-12-10 08:45:00', '2016-12-10 11:00:00', 'Anglais : compréhension', (SELECT id from class_room WHERE building = 'Multimedia' AND room_nb = 206), (SELECT id from staff WHERE email = 'hoche.genevieve@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L1 Mathématiques'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY) );
@@ -125,7 +125,7 @@ INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-12-06 09:00:00', '2016-12-06 11:15:00', 'Analyse graphique', (SELECT id from class_room WHERE building = 'Multimédia' AND room_nb = 104), (SELECT id from staff WHERE email = 'salma.juliette@univ.fr'));
+('2016-12-06 09:00:00', '2016-12-06 11:15:00', 'Analyse graphique', (SELECT id from class_room WHERE building = 'Multimedia' AND room_nb = 104), (SELECT id from staff WHERE email = 'salma.juliette@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L2 informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY)),
@@ -134,7 +134,7 @@ INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-12-03 09:00:00', '2016-12-03 11:15:00', 'Algèbre', (SELECT id from class_room WHERE building = 'Multimédia' AND room_nb = 206), (SELECT id from staff WHERE email = 'salma.juliette@univ.fr'));
+('2016-12-03 09:00:00', '2016-12-03 11:15:00', 'Algèbre', (SELECT id from class_room WHERE building = 'Multimedia' AND room_nb = 206), (SELECT id from staff WHERE email = 'salma.juliette@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L1 informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY)),
@@ -175,7 +175,7 @@ INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 
 
 INSERT INTO lesson (time_start, time_end, title, class_room_id, teacher_id) VALUES
-('2016-12-09 13:45:00', '2016-12-09 15:15:00', 'Langage : python', (SELECT id from class_room WHERE building = 'Jean Jaurès' AND room_nb = 128), (SELECT id from staff WHERE email = 'gallard.julien@univ.fr'));
+('2016-12-09 13:45:00', '2016-12-09 15:15:00', 'Langage : python', (SELECT id from class_room WHERE building = 'Jean Jaures' AND room_nb = 128), (SELECT id from staff WHERE email = 'gallard.julien@univ.fr'));
 
 INSERT INTO lesson_participants (degree_id, lesson_id) VALUES
 ((SELECT id FROM degree WHERE name = 'L1 informatique'), (SELECT id FROM lesson ORDER BY id DESC FETCH FIRST ROW ONLY)),

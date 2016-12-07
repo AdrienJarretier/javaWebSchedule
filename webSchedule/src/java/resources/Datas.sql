@@ -4,7 +4,7 @@ INSERT INTO class_room (building, room_nb, capacity)  VALUES
 ('Borel', 215, 35),
 
 ('Jean Jaures', 128, 30),
-('Jean Jaurès', 15, 100),
+('Jean Jaures', 15, 100),
 
 ('Multimedia', 104, 50),
 ('Multimedia', 206, 28);
