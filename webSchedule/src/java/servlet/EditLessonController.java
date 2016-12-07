@@ -59,8 +59,8 @@ public class EditLessonController extends HttpServlet {
 
             if (timeStart.after(timeEnd)) {
                 request.setAttribute("error", "lesson must ends after it starts");
-                request.setAttribute("lesson", lesson);
-                request.getRequestDispatcher("editLesson.jsp").forward(request, response);
+                request.setAttribute("id", id);
+                request.getRequestDispatcher("ButtonEditController").forward(request, response);
             }
 
             String title = request.getParameter("title");
