@@ -18,7 +18,8 @@ CREATE TABLE class_room (
 	id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	building VARCHAR(30),
 	room_nb INT,
-	capacity INT
+	capacity INT,
+        CONSTRAINT br_un UNIQUE (building, room_nb)
 );
 
 CREATE TABLE degree(
@@ -46,12 +47,15 @@ CREATE TABLE lesson (
 	time_end TIMESTAMP, 
 	title VARCHAR(30), 
 	class_room_id INT REFERENCES class_room,
-	teacher_id INT REFERENCES staff 
+	teacher_id INT REFERENCES staff,
+        CONSTRAINT tscr_un UNIQUE (time_start, class_room_id),
+        CONSTRAINT tst_un UNIQUE (time_start, teacher_id)
 );
 
 
 CREATE TABLE lesson_participants(
 	degree_id INT REFERENCES degree,
-	lesson_id INT REFERENCES lesson
+	lesson_id INT REFERENCES lesson,
+        CONSTRAINT dl_un UNIQUE (degree_id, lesson_id)
 );
 
