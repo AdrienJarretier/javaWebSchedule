@@ -1,18 +1,23 @@
 
 INSERT INTO class_room (building, room_nb, capacity)  VALUES 
-('Borel', 12, 12),
+('Borel', 12, 150),
 ('Borel', 215, 35),
+
 ('Jean Jaures', 128, 30),
-('Multimedia', 104, 25),
+('Jean Jaurès', 15, 100),
+
+('Multimedia', 104, 50),
 ('Multimedia', 206, 28);
 
 
 INSERT INTO degree (name, students_count) VALUES 
+('L1 informatique', 30),
 ('L2 informatique', 12),
-('L1 Biologie', 35),
-('L3 Mathématiques', 128),
-('L2 PC', 104),
-('L3 informatique', 28);
+('L3 informatique', 28),
+
+('L1 Mathématiques', 128),
+('L2 Mathématiques', 115);
+
 
 
 /*
