@@ -20,7 +20,7 @@
         Please enter the lesson : <br>
 
         <form method="POST" action='AddLessonController'> 
-            Dates must be of this type : year-month-day h:min:s <br>
+            
             Start : <input id='date_timepicker_start' name='time_start' type='text'><br>
             End : <input id='date_timepicker_end' name='time_end' type='text' ><br>
             Title : <input name='title' type='text' ><br>
