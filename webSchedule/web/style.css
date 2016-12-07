@@ -35,8 +35,11 @@ nav li {
     
     border-style: outset;
     float: left; 
-    min-width: 150px;
+    min-width: 160px;
     text-align: center;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
     
 }
 
