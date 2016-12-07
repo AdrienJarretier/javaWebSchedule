@@ -17,9 +17,9 @@
     <body>
         <c:import url="nav.jsp" />
         <h1> Welcome ! </h1>
-        Please enter the lesson : <br>
 
         <form method="POST" action='AddLessonController'> 
+        <h2>Please enter the lesson : </h2>
             
             Start : <input id='date_timepicker_start' name='time_start' type='text'><br>
             End : <input id='date_timepicker_end' name='time_end' type='text' ><br>
@@ -51,7 +51,6 @@
                 <c:forEach var="degrees" items="${degrees}">
                     <input type='checkbox' name = 'degree' value='${degrees.getId()}'> 
                     ${degrees.getName()} (${degrees.getStudent_count()} students) <br>
-                    </input>
                 </c:forEach>
             </fieldset>
 

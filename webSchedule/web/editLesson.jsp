@@ -18,11 +18,11 @@
     <body>
         <c:import url="nav.jsp" />
         <h1> Welcome ! </h1>
-        Edit lesson : <br>
         <div style="color:red">${errorMessage}</div>
 
 
         <form method="POST" action='EditLessonController'> 
+            <h2>Edit lesson : </h2>
             <input name='id' type='hidden' value='${lesson.getId()}'><br>
             Start : <input id='date_timepicker_start' name='time_start' type='text'
                            value='<fmt:formatDate value="${lesson.getTimeStart()}" pattern="YYYY-MM-dd HH:mm:ss" />'      
@@ -55,7 +55,6 @@
                 <c:forEach var="degree" items="${degrees}">
                     <input type='checkbox' name = 'degree' value='${degree.getId()}' ${ (lesson.getParticipants().contains(degree) ? "checked" : "") }> 
                     ${degree.getName()} (${degree.getStudent_count()} students) <br>
-                    </input>
                 </c:forEach>
             </fieldset>
 
